@@ -1,0 +1,25 @@
+test005.usc:22:11: error: Expected type int in return statement
+			return "Hello world!";
+			       ^
+test005.usc:23:13: error: Use of undeclared identifier 'x'
+			return !(x);
+			         ^
+test005.usc:24:13: error: Use of undeclared identifier 'z'
+			return ++z;
+			         ^
+test005.usc:25:13: error: Use of undeclared identifier 'y'
+			return --y;
+			         ^
+test005.usc:26:11: error: Use of undeclared identifier 'array'
+			return array[2];
+			       ^
+test005.usc:27:12: error: Use of undeclared identifier 'bcd'
+			return !bcd;
+			        ^
+test005.usc:28:10: error: Invalid empty return in non-void function
+			return;
+			      ^
+test005.usc:31:1: error: USC requires non-void functions to end with a return
+}
+^
+8 Error(s)

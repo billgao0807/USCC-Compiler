@@ -1,0 +1,20 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 0
+---------Decl: int y
+------------ConstantExpr: 0
+---------Decl: int z
+------------ConstantExpr: 1
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------LogicalOr: 
+------------------LogicalOr: 
+---------------------IdentExpr: x
+---------------------IdentExpr: y
+------------------IdentExpr: z
+---------ReturnStmt:
+------------ConstantExpr: 0

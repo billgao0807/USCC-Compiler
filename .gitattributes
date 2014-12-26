@@ -1,0 +1,4 @@
+# Ast output files should always end in lf
+*.ast text eol=lf
+*.err text eol=lf
+*.output text eol=lf

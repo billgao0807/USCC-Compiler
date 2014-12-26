@@ -1,0 +1,10 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------CompoundStmt:
+------------ReturnStmt:
+---------------ConstantExpr: 0
+------------CompoundStmt:
+---------------ReturnStmt:
+------------------ConstantExpr: 1
+---------------ReturnStmt: (empty)

@@ -1,0 +1,71 @@
+// quicksort.usc
+// Implements in-place quicksort algorithm
+// (I just went by the wikipedia pseudocode)
+// Expected result:
+// abcdeeefghhijklmnoooopqrrsttuuvwxyz
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int partition(char array[], int left, int right, int pivotIdx)
+{
+	char pivotVal = array[pivotIdx];
+	int storeIdx = left;
+	int i = left;
+	char temp;
+	
+	// Move pivot to end
+	temp = array[pivotIdx];
+	array[pivotIdx] = array[right];
+	array[right] = temp;
+	
+	while (i < right)
+	{
+		if (array[i] < pivotVal)
+		{
+			// Swap array[i] and array[storeIdx]
+			temp = array[i];
+			array[i] = array[storeIdx];
+			array[storeIdx] = temp;
+			++storeIdx;
+		}
+		
+		++i;
+	}
+	
+	// Swap array[storeIdx] and array[right]
+	temp = array[storeIdx];
+	array[storeIdx] = array[right];
+	array[right] = temp;
+	
+	return storeIdx;
+}
+
+void quicksort(char array[], int left, int right)
+{
+	int pivotIdx;
+	
+	if (left < right)
+	{
+		// Pick the middle point
+		pivotIdx = left + (right - left) / 2;
+		
+		pivotIdx = partition(array, left, right, pivotIdx);
+		quicksort(array, left, pivotIdx - 1);
+		quicksort(array, pivotIdx + 1, right);
+	}
+}
+
+int main()
+{
+	char letters[] = "thequickbrownfoxjumpsoverthelazydog";
+	quicksort(letters, 0, 34);
+	
+	printf("%s\n", letters);
+	
+	return 0;
+}

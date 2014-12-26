@@ -1,0 +1,4 @@
+semant09e.usc:18:4: error: Reassignment of arrays is not allowed
+	x = "This is also a string";
+	  ^
+1 Error(s)

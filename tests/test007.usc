@@ -1,0 +1,24 @@
+// Test007.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | ReturnStmt
+// Expr --> NumExpr
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return (20 / 10 * 2 % 3) / 16;
+	return 5 + 7 * 8;
+	return 20 - 8 * (3 + 5) / 2;
+}

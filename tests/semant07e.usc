@@ -1,0 +1,20 @@
+// semant07e.usc
+// Tests for trying to access
+// an identifier as an array or function
+// when it's not one of those.
+// Two errors expected
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x;
+	int y;
+	int z = x[0] + y();
+	return 0;
+}

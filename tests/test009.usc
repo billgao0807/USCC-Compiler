@@ -1,0 +1,27 @@
+// Test009.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | ReturnStmt
+// Expr --> ...
+// AndTerm --> ...
+// RelExpr --> ...
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return (20 / 10 * 2) < 10000 + 5;
+	return a == b != c < d > 10;
+	return e == f || g > h && i < j;
+	return e == f && g > h || i < j;
+}

@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="tests">
+      <UniqueIdentifier>{c43c6d0f-4dba-4bc0-a608-3e451ed6f38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="uscc">
+      <UniqueIdentifier>{39701fb1-a1ec-41b9-9d2f-8b5076b082ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scan">
+      <UniqueIdentifier>{8358d37b-f949-43de-b311-d842c792c0a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parse">
+      <UniqueIdentifier>{46cb7b90-5c86-4e40-9fe9-37a6ae7cf40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="opt">
+      <UniqueIdentifier>{69f79c36-d0df-4d22-9845-d58170764ea2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tests\emit01.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit02.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit03.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit04.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit05.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit06.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit07.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit08.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit09.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit10.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit11.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\emit12.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\live01.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\quicksort.bc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\quicksort.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant01.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant01e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant02.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant02e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant03e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant04e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant05e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant06e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant07e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant08e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant09e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant10e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant11e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\semant12e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\ssa01.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test001.bc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test001.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test002.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test003.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test004.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test005.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test006.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test007.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test008.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test009.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test010.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test011.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test012.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test013.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test014.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test015.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\test016.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="scan\Tokens.def">
+      <Filter>scan</Filter>
+    </None>
+    <None Include="scan\usc.l">
+      <Filter>scan</Filter>
+    </None>
+    <None Include="tests\opt01.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt02.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt03.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt04.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt05.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt06.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\opt07.usc">
+      <Filter>tests</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="uscc\ezOptionParser.hpp">
+      <Filter>uscc</Filter>
+    </ClInclude>
+    <ClInclude Include="scan\FlexLexer.h">
+      <Filter>scan</Filter>
+    </ClInclude>
+    <ClInclude Include="scan\Tokens.h">
+      <Filter>scan</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\ASTNodes.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\Emitter.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\Parse.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\ParseExcept.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\Symbols.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="parse\Types.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="opt\Passes.h">
+      <Filter>opt</Filter>
+    </ClInclude>
+    <ClInclude Include="opt\SSABuilder.h">
+      <Filter>opt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="uscc\main.cpp">
+      <Filter>uscc</Filter>
+    </ClCompile>
+    <ClCompile Include="scan\FlexLexer.cpp">
+      <Filter>scan</Filter>
+    </ClCompile>
+    <ClCompile Include="scan\Tokens.cpp">
+      <Filter>scan</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ASTEmit.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ASTExpr.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ASTNodes.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ASTPrint.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ASTStmt.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\Emitter.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\Parse.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ParseExcept.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ParseExpr.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\ParseStmt.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="parse\Symbols.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\SSABuilder.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\ConstantBranch.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\ConstantOps.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\DeadBlocks.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\LICM.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\Passes.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

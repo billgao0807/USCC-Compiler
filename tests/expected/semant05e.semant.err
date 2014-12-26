@@ -1,0 +1,10 @@
+semant05e.usc:17:9: error: Use of undeclared identifier 'y'
+	return y;
+	       ^
+semant05e.usc:20:5: error: Invalid redeclaration of function 'main'
+int main()
+    ^
+semant05e.usc:22:9: error: Use of undeclared identifier 'x'
+	return x;
+	       ^
+3 Error(s)

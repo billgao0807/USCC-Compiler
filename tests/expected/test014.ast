@@ -1,0 +1,31 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------FuncExpr: funcCallNoArgs
+---------Decl: int y
+------------FuncExpr: funcCallArg
+---------------IdentExpr: z
+---------Decl: int z
+------------FuncExpr: funcCallWithArgs
+---------------BinaryMath +:
+------------------IdentExpr: z
+------------------IdentExpr: y
+---------------FuncExpr: funcCallNoArgs
+---------ExprStmt
+------------FuncExpr: testNakedFunc
+---------IfStmt: 
+------------FuncExpr: testFunc
+------------CompoundStmt:
+------------IfStmt: 
+---------------FuncExpr: testFunc2
+------------------IdentExpr: stuff
+---------------CompoundStmt:
+------------------ExprStmt
+---------------------DecExpr: y
+---------ReturnStmt:
+------------FuncExpr: testFunc3
+---------------DecExpr: x
+---------------IdentExpr: y
+---------------IdentExpr: z
+---------------IdentExpr: w

@@ -1,0 +1,17 @@
+// semant01e.usc
+// Tests basic variable declarations
+// in one scope.
+// Expected: Semantic error for undefined
+// identifier "x"
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return x;
+}

@@ -1,0 +1,27 @@
+// opt02.usc
+// Tests constant branch folding (false case)
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int a = 20;
+	int b = 55;
+	
+	if (a != 20)
+	{
+		b = 90;
+	}
+	else
+	{
+		b = 100;
+	}
+	
+	printf("%d\n", b);
+	return 0;
+}

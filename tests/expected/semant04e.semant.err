@@ -1,0 +1,7 @@
+semant04e.usc:17:2: error: Use of undeclared identifier 'z'
+	z = x + y;
+	^
+semant04e.usc:18:1: error: USC requires non-void functions to end with a return
+}
+^
+2 Error(s)

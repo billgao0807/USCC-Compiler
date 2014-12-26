@@ -1,0 +1,24 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------CompoundStmt:
+------------ReturnStmt:
+---------------ConstantExpr: 1
+------------CompoundStmt:
+---------------ReturnStmt:
+------------------StringExpr: Hello world!
+---------------ReturnStmt:
+------------------NotExpr:
+---------------------IdentExpr: x
+---------------ReturnStmt:
+------------------IncExpr: z
+---------------ReturnStmt:
+------------------DecExpr: y
+---------------ReturnStmt:
+------------------ArrayExpr: 
+---------------------ArraySub: array
+------------------------ConstantExpr: 2
+---------------ReturnStmt:
+------------------NotExpr:
+---------------------IdentExpr: bcd
+---------------ReturnStmt: (empty)

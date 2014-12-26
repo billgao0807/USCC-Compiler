@@ -1,0 +1,18 @@
+// semant08e.usc
+// Tests assigning a string to an
+// integer.
+// Expected 2 errors
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = "This is a string";
+	x = "This is also a string";
+	return 0;
+}

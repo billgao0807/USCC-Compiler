@@ -1,0 +1,49 @@
+test009.usc:24:9: error: Use of undeclared identifier 'a'
+	return a == b != c < d > 10;
+	       ^
+test009.usc:24:14: error: Use of undeclared identifier 'b'
+	return a == b != c < d > 10;
+	            ^
+test009.usc:24:19: error: Use of undeclared identifier 'c'
+	return a == b != c < d > 10;
+	                 ^
+test009.usc:24:23: error: Use of undeclared identifier 'd'
+	return a == b != c < d > 10;
+	                     ^
+test009.usc:25:9: error: Use of undeclared identifier 'e'
+	return e == f || g > h && i < j;
+	       ^
+test009.usc:25:14: error: Use of undeclared identifier 'f'
+	return e == f || g > h && i < j;
+	            ^
+test009.usc:25:19: error: Use of undeclared identifier 'g'
+	return e == f || g > h && i < j;
+	                 ^
+test009.usc:25:23: error: Use of undeclared identifier 'h'
+	return e == f || g > h && i < j;
+	                     ^
+test009.usc:25:28: error: Use of undeclared identifier 'i'
+	return e == f || g > h && i < j;
+	                          ^
+test009.usc:25:32: error: Use of undeclared identifier 'j'
+	return e == f || g > h && i < j;
+	                              ^
+test009.usc:26:9: error: Use of undeclared identifier 'e'
+	return e == f && g > h || i < j;
+	       ^
+test009.usc:26:14: error: Use of undeclared identifier 'f'
+	return e == f && g > h || i < j;
+	            ^
+test009.usc:26:19: error: Use of undeclared identifier 'g'
+	return e == f && g > h || i < j;
+	                 ^
+test009.usc:26:23: error: Use of undeclared identifier 'h'
+	return e == f && g > h || i < j;
+	                     ^
+test009.usc:26:28: error: Use of undeclared identifier 'i'
+	return e == f && g > h || i < j;
+	                          ^
+test009.usc:26:32: error: Use of undeclared identifier 'j'
+	return e == f && g > h || i < j;
+	                              ^
+16 Error(s)

@@ -1,0 +1,27 @@
+// semant02.usc
+// Semanatic test that should work
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 50;
+	int y;
+	int z;
+	{
+		int x;
+		int b;
+		{
+			int c;
+		}
+		{
+			int c;
+		}
+	}
+	return 0;
+}

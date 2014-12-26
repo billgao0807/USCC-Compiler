@@ -1,0 +1,62 @@
+// Defines the Tokens that we then inject to other files
+// via X Macro
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+// Special tokens
+TOKEN(EndOfFile,"EOF",0)
+TOKEN(Newline,"\\n",0)
+TOKEN(Comment,"Comment",0)
+TOKEN(Space,"",0)
+TOKEN(Tab,"\\t",0)
+
+// An unknown token
+TOKEN(Unknown,"??",0)
+
+// Keywords
+TOKEN(Key_char,"char",4)
+TOKEN(Key_else,"else",4)
+TOKEN(Key_if,"if",2)
+TOKEN(Key_int,"int",3)
+TOKEN(Key_return,"return",6)
+TOKEN(Key_void,"void",4)
+TOKEN(Key_while,"while",5)
+
+// Expression Operators
+TOKEN(Assign,"=",1)
+TOKEN(Plus,"+",1)
+TOKEN(Minus,"-",1)
+TOKEN(Mult,"*",1)
+TOKEN(Div,"/",1)
+TOKEN(Mod,"%",1)
+TOKEN(Inc,"++",2)
+TOKEN(Dec,"--",2)
+TOKEN(LBracket,"[",1)
+TOKEN(RBracket,"]",1)
+TOKEN(EqualTo,"==",2)
+TOKEN(NotEqual,"!=",2)
+TOKEN(Or,"||",2)
+TOKEN(And,"&&",2)
+TOKEN(Not,"!",1)
+TOKEN(LessThan,"<",1)
+TOKEN(GreaterThan,">",1)
+TOKEN(LParen,"(",1)
+TOKEN(RParen,")",1)
+TOKEN(Addr,"&",1)
+
+// Other
+TOKEN(SemiColon,";",1)
+TOKEN(LBrace,"{",1)
+TOKEN(RBrace,"}",1)
+TOKEN(Comma,",",1)
+
+// Values
+TOKEN(Constant,"Constant",-1)
+TOKEN(String,"String",-1)
+
+// Identifier
+TOKEN(Identifier,"Identifier",-1)

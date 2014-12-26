@@ -1,0 +1,29 @@
+// opt03.usc
+// Tests constant branch folding (with or/and)
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int a = 0;
+	int b = 1;
+	int c = 2;
+	int result = 0;
+	
+	if ((a && c) || b)
+	{
+		result = 20;
+	}
+	else
+	{
+		result = 10;
+	}
+	
+	printf("%d\n", result);
+	return 0;
+}

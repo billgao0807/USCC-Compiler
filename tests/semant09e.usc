@@ -1,0 +1,20 @@
+// semant09e.usc
+// Tests that string assignment works
+// as expected.
+// Expected error on line 11, because
+// we don't allow reassignment of char[].
+// But line 10 should be fine.
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	char x[] = "This is a string";
+	x = "This is also a string";
+	return 0;
+}

@@ -1,0 +1,32 @@
+// parse05e.usc
+// More statement parse errors
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	if (x)
+	{
+		
+	}
+	else if;
+	
+	if (x)a=;
+	if (x)();
+	if (x);
+	if (;
+	x = 5;
+	x = ;
+	
+	while();
+	while(;
+	while(x);
+	while(x)int a;
+	
+	return 0;
+}

@@ -1,0 +1,50 @@
+// emit07.usc
+// Tests ! operator
+// Tests while loop
+// Expected output:
+// 0
+// 5
+// 8
+// 9
+// 4
+// 8
+// 9
+// 3
+// 8
+// 9
+// 2
+// 8
+// 9
+// 1
+// 8
+// 9
+// 1
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 5;
+	printf("%d\n", !x);
+	
+	while (x > 0)
+	{
+		int y = 8;
+		printf("%d\n", x);
+		--x;
+		while (y < 10)
+		{
+			printf("%d\n", y);
+			++y;
+		}
+	}
+	
+	printf("%d\n", !x);
+	
+	return 0;
+}

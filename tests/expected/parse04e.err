@@ -1,0 +1,25 @@
+parse04e.usc:13:5: error: Type must be followed by identifier
+	int;
+	   ^
+parse04e.usc:14:10: error: Invalid expression after = in declaration
+	int x = ;
+	        ^
+parse04e.usc:15:4: error: Valid expression required inside [ ].
+	x[] = 0;
+	  ^
+parse04e.usc:16:8: error: = must be followed by an expression
+	x[5] =;
+	      ^
+parse04e.usc:17:6: error: = must be followed by an expression
+	x = ;
+	    ^
+parse04e.usc:18:2: error: Declarations are only allowed at the beginning of a scope block
+	int y = 0;
+	^
+parse04e.usc:20:4: error: Expected: ; but saw: =
+	y = 5;
+	  ^
+parse04e.usc:21:6: error: Invalid condition for if statement
+	if ()
+	    ^
+8 Error(s)

@@ -1,0 +1,47 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------ReturnStmt:
+------------BinaryCmp <:
+---------------BinaryMath *:
+------------------BinaryMath /:
+---------------------ConstantExpr: 20
+---------------------ConstantExpr: 10
+------------------ConstantExpr: 2
+---------------BinaryMath +:
+------------------ConstantExpr: 10000
+------------------ConstantExpr: 5
+---------ReturnStmt:
+------------BinaryCmp >:
+---------------BinaryCmp <:
+------------------BinaryCmp !=:
+---------------------BinaryCmp ==:
+------------------------IdentExpr: a
+------------------------IdentExpr: b
+---------------------IdentExpr: c
+------------------IdentExpr: d
+---------------ConstantExpr: 10
+---------ReturnStmt:
+------------LogicalOr: 
+---------------BinaryCmp ==:
+------------------IdentExpr: e
+------------------IdentExpr: f
+---------------LogicalAnd: 
+------------------BinaryCmp >:
+---------------------IdentExpr: g
+---------------------IdentExpr: h
+------------------BinaryCmp <:
+---------------------IdentExpr: i
+---------------------IdentExpr: j
+---------ReturnStmt:
+------------LogicalOr: 
+---------------LogicalAnd: 
+------------------BinaryCmp ==:
+---------------------IdentExpr: e
+---------------------IdentExpr: f
+------------------BinaryCmp >:
+---------------------IdentExpr: g
+---------------------IdentExpr: h
+---------------BinaryCmp <:
+------------------IdentExpr: i
+------------------IdentExpr: j

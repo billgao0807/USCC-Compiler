@@ -1,0 +1,41 @@
+// emit11.usc
+// Tests && short-circuiting w/ while
+// and if/else
+// Expected output:
+// 5
+// y != 1
+// 4
+// y != 1
+// 3
+// y != 1
+// 2
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 1;
+	int y = 5;
+	
+	while (x && y)
+	{
+		printf("%d\n", y);
+		--y;
+		
+		if (y == 1)
+		{
+			x = 0;
+		}
+		else
+		{
+			printf("y != 1\n");
+		}
+	}
+	
+	return 0;
+}

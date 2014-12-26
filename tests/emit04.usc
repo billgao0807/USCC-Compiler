@@ -1,0 +1,24 @@
+// emit04.usc
+// Tests basic declarations
+// Tests basic ident expression
+// Expected output:
+// 5
+// 15
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 5;
+	int y = x + 10;
+	
+	printf("%d\n", x);
+	printf("%d\n", y);
+	
+	return 0;
+}

@@ -1,0 +1,48 @@
+// Test012.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | AssignStmt
+//        | IfStmt
+//        | WhileStmt
+//        | ReturnStmt
+//        | ExprStmt
+//        | NullStmt
+// Expr --> ...
+// AndTerm --> ...
+// RelExpr --> ...
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	if (z == 2)
+		;
+	
+	if (x == 5)
+	{
+		while (1) ;
+		y = 7 + 8 * 2;
+	}
+	else if (x == 4)
+	{
+		--x;
+	}
+	else if (x == 3)
+	{
+		y = y * y;
+	}
+	else
+	{
+		z = 42;
+	}
+}

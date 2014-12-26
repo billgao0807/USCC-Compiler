@@ -1,0 +1,4 @@
+semant12e.usc:17:1: error: USC requires non-void functions to end with a return
+}
+^
+1 Error(s)

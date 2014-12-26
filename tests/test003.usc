@@ -1,0 +1,28 @@
+// Test003.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | ReturnStmt
+// Expr --> Factor
+// Factor --> ( Expr )
+//          | constant
+//          | string
+//          | id
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	{
+		return ((1));
+		{
+			return "Hello world!";
+			return (x);
+			return;
+		}
+	}
+}

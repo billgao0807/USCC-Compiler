@@ -1,0 +1,59 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------ConstantExpr: 5
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryMath *:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 5
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryMath /:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 5
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryMath -:
+------------------ConstantExpr: 100
+------------------ConstantExpr: 50
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryCmp ==:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 10
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryCmp !=:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 10
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryCmp >:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 10
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryCmp <:
+------------------ConstantExpr: 5
+------------------ConstantExpr: 10
+---------ReturnStmt:
+------------ConstantExpr: 0

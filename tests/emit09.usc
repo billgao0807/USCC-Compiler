@@ -1,0 +1,23 @@
+// emit09.usc
+// Tests basic short-circuiting
+// (logical or)
+// Expected output:
+// 1
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 0;
+	int y = 0;
+	int z = 1;
+	
+	printf("%d\n", x || y || z);
+	
+	return 0;
+}

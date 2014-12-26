@@ -1,0 +1,67 @@
+Program:
+---Function: void printArray
+------ArgDecl: int[] array
+------ArgDecl: int size
+------CompoundStmt:
+---------Decl: int i
+------------ConstantExpr: 0
+---------WhileStmt
+------------BinaryCmp <:
+---------------IdentExpr: i
+---------------BinaryMath -:
+------------------IdentExpr: size
+------------------ConstantExpr: 1
+------------CompoundStmt:
+---------------ExprStmt
+------------------FuncExpr: printf
+---------------------StringExpr: %d,
+---------------------ArrayExpr: 
+------------------------ArraySub: array
+---------------------------IdentExpr: i
+---------------ExprStmt
+------------------IncExpr: i
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------ArrayExpr: 
+------------------ArraySub: array
+---------------------IdentExpr: i
+---Function: int main
+------CompoundStmt:
+---------Decl: int[5] array
+---------Decl: int x
+------------ConstantExpr: 5
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 0
+------------ConstantExpr: 1
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 1
+------------ConstantExpr: 1
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 2
+------------ConstantExpr: 2
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 3
+------------ConstantExpr: 3
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 4
+------------ConstantExpr: 5
+---------ExprStmt
+------------FuncExpr: printArray
+---------------IdentExpr: array
+---------------ConstantExpr: 5
+---------AssignStmt: x
+------------ConstantExpr: 10
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------IdentExpr: x
+---------ReturnStmt:
+------------ConstantExpr: 0

@@ -1,0 +1,12 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: char[11] str
+------------StringExpr: It worked!
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %s
+
+---------------IdentExpr: str
+---------ReturnStmt:
+------------ConstantExpr: 0

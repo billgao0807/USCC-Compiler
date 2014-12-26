@@ -1,0 +1,26 @@
+// Test015.usc
+// This is the FIRST well-formed USC program
+// unit test.
+//
+// Tests adding multiple functions,
+// and arguments to functions.
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int multiply(int x, int y)
+{
+	return x * y;
+}
+
+int main()
+{
+	int x = multiply(5, 6);
+	printf("5 * 6 = %d\n", x);
+	
+	return 0;
+}

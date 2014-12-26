@@ -1,0 +1,7 @@
+test002.usc:21:10: error: Invalid empty return in non-void function
+			return;
+			      ^
+test002.usc:24:1: error: USC requires non-void functions to end with a return
+}
+^
+2 Error(s)

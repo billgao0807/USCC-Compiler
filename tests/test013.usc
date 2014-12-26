@@ -1,0 +1,31 @@
+// Test013.usc
+// Tests the following:
+// Decl --> ...
+// Stmt --> ...
+// Expr --> ...
+// AndTerm --> ...
+// RelExpr --> ...
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x1;
+	int y1;
+	char b;
+	int x2 = 5;
+	int y2 = x2 + 6;
+	char a = 'a';
+	int int_array[10];
+	char char_array[] = "Hello world!";
+}

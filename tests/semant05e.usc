@@ -1,0 +1,23 @@
+// semant05e.usc
+// Tests function redeclaration
+// Expected: 3 errors
+// (undefined y)
+// (invalid redeclaraiton main)
+// (undefined x)
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return y;
+}
+
+int main()
+{
+	return x;
+}

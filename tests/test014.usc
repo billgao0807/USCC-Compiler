@@ -1,0 +1,37 @@
+// Test014.usc
+// Tests the following:
+// Decl --> ...
+// Stmt --> ...
+// Expr --> ...
+// AndTerm --> ...
+// RelExpr --> ...
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = funcCallNoArgs();
+	int y = funcCallArg(z);
+	int z = funcCallWithArgs(z + y, funcCallNoArgs());
+
+	testNakedFunc();
+	
+	if (testFunc())
+	{
+	}
+	else if (testFunc2(stuff))
+	{
+		--y;
+	}
+	
+	return (testFunc3(--x, y, z, w));
+}

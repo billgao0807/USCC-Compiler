@@ -1,0 +1,22 @@
+// semant10e.usc
+// Basic type error checking
+// for expression ops
+// 5 errors expected
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int a;
+	a = "Stuff" && "Stuff";
+	a = "Stuff" || "Stuff";
+	a = "Stuff" + "Stuff";
+	a = "Stuff" * "Stuff";
+	a = !"Stuff";
+	return 0;
+}

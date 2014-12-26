@@ -1,0 +1,29 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------ReturnStmt:
+------------BinaryMath /:
+---------------BinaryMath %:
+------------------BinaryMath *:
+---------------------BinaryMath /:
+------------------------ConstantExpr: 20
+------------------------ConstantExpr: 10
+---------------------ConstantExpr: 2
+------------------ConstantExpr: 3
+---------------ConstantExpr: 16
+---------ReturnStmt:
+------------BinaryMath +:
+---------------ConstantExpr: 5
+---------------BinaryMath *:
+------------------ConstantExpr: 7
+------------------ConstantExpr: 8
+---------ReturnStmt:
+------------BinaryMath -:
+---------------ConstantExpr: 20
+---------------BinaryMath /:
+------------------BinaryMath *:
+---------------------ConstantExpr: 8
+---------------------BinaryMath +:
+------------------------ConstantExpr: 3
+------------------------ConstantExpr: 5
+------------------ConstantExpr: 2

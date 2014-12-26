@@ -1,0 +1,22 @@
+// semant01.usc
+// Semanatic test that
+// should generate a valid tree
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 50;
+	char c = x + 5;
+	char d = 127;
+	int y;
+	x = ++d;
+	y = d + 50;
+	printf("%d\n", x);
+	return 0;
+}

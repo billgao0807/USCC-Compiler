@@ -1,0 +1,29 @@
+// live01.usc
+// Test for live variable analysis
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+void foo(int x) {
+	int y = 0;
+	x = y / 3; // useless
+}
+
+int main() {
+	int a;
+	int b;
+	int c;
+	a = 5;
+	b = a * 2;        // useless
+	c = a + 4;        // useless
+	foo(a);
+	c = a * 6;
+	printf("c: %d\n", c);
+	
+	return 0;
+}
+

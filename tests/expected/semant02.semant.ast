@@ -1,0 +1,16 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 50
+---------Decl: int y
+---------Decl: int z
+---------CompoundStmt:
+------------Decl: int x
+------------Decl: int b
+------------CompoundStmt:
+---------------Decl: int c
+------------CompoundStmt:
+---------------Decl: int c
+---------ReturnStmt:
+------------ConstantExpr: 0

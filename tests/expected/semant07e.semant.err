@@ -1,0 +1,7 @@
+semant07e.usc:18:11: error: 'x' is not an array
+	int z = x[0] + y();
+	         ^
+semant07e.usc:18:18: error: 'y' is not a function
+	int z = x[0] + y();
+	                ^
+2 Error(s)

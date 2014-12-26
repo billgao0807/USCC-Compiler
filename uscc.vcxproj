@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scan\Tokens.def" />
+    <None Include="scan\usc.l" />
+    <None Include="tests\emit01.usc" />
+    <None Include="tests\emit02.usc" />
+    <None Include="tests\emit03.usc" />
+    <None Include="tests\emit04.usc" />
+    <None Include="tests\emit05.usc" />
+    <None Include="tests\emit06.usc" />
+    <None Include="tests\emit07.usc" />
+    <None Include="tests\emit08.usc" />
+    <None Include="tests\emit09.usc" />
+    <None Include="tests\emit10.usc" />
+    <None Include="tests\emit11.usc" />
+    <None Include="tests\emit12.usc" />
+    <None Include="tests\live01.usc" />
+    <None Include="tests\opt01.usc" />
+    <None Include="tests\opt02.usc" />
+    <None Include="tests\opt03.usc" />
+    <None Include="tests\opt04.usc" />
+    <None Include="tests\opt05.usc" />
+    <None Include="tests\opt06.usc" />
+    <None Include="tests\opt07.usc" />
+    <None Include="tests\quicksort.bc" />
+    <None Include="tests\quicksort.usc" />
+    <None Include="tests\semant01.usc" />
+    <None Include="tests\semant01e.usc" />
+    <None Include="tests\semant02.usc" />
+    <None Include="tests\semant02e.usc" />
+    <None Include="tests\semant03e.usc" />
+    <None Include="tests\semant04e.usc" />
+    <None Include="tests\semant05e.usc" />
+    <None Include="tests\semant06e.usc" />
+    <None Include="tests\semant07e.usc" />
+    <None Include="tests\semant08e.usc" />
+    <None Include="tests\semant09e.usc" />
+    <None Include="tests\semant10e.usc" />
+    <None Include="tests\semant11e.usc" />
+    <None Include="tests\semant12e.usc" />
+    <None Include="tests\ssa01.usc" />
+    <None Include="tests\test001.bc" />
+    <None Include="tests\test001.usc" />
+    <None Include="tests\test002.usc" />
+    <None Include="tests\test003.usc" />
+    <None Include="tests\test004.usc" />
+    <None Include="tests\test005.usc" />
+    <None Include="tests\test006.usc" />
+    <None Include="tests\test007.usc" />
+    <None Include="tests\test008.usc" />
+    <None Include="tests\test009.usc" />
+    <None Include="tests\test010.usc" />
+    <None Include="tests\test011.usc" />
+    <None Include="tests\test012.usc" />
+    <None Include="tests\test013.usc" />
+    <None Include="tests\test014.usc" />
+    <None Include="tests\test015.usc" />
+    <None Include="tests\test016.usc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="opt\Passes.h" />
+    <ClInclude Include="opt\SSABuilder.h" />
+    <ClInclude Include="parse\ASTNodes.h" />
+    <ClInclude Include="parse\Emitter.h" />
+    <ClInclude Include="parse\Parse.h" />
+    <ClInclude Include="parse\ParseExcept.h" />
+    <ClInclude Include="parse\Symbols.h" />
+    <ClInclude Include="parse\Types.h" />
+    <ClInclude Include="scan\FlexLexer.h" />
+    <ClInclude Include="scan\Tokens.h" />
+    <ClInclude Include="uscc\ezOptionParser.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="opt\ConstantBranch.cpp" />
+    <ClCompile Include="opt\ConstantOps.cpp" />
+    <ClCompile Include="opt\DeadBlocks.cpp" />
+    <ClCompile Include="opt\LICM.cpp" />
+    <ClCompile Include="opt\Passes.cpp" />
+    <ClCompile Include="opt\SSABuilder.cpp" />
+    <ClCompile Include="parse\ASTEmit.cpp" />
+    <ClCompile Include="parse\ASTExpr.cpp" />
+    <ClCompile Include="parse\ASTNodes.cpp" />
+    <ClCompile Include="parse\ASTPrint.cpp" />
+    <ClCompile Include="parse\ASTStmt.cpp" />
+    <ClCompile Include="parse\Emitter.cpp" />
+    <ClCompile Include="parse\Parse.cpp" />
+    <ClCompile Include="parse\ParseExcept.cpp" />
+    <ClCompile Include="parse\ParseExpr.cpp" />
+    <ClCompile Include="parse\ParseStmt.cpp" />
+    <ClCompile Include="parse\Symbols.cpp" />
+    <ClCompile Include="scan\FlexLexer.cpp" />
+    <ClCompile Include="scan\Tokens.cpp" />
+    <ClCompile Include="uscc\main.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{01B453DB-4CD6-4205-A2EE-156AE8272B48}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <LocalDebuggerEnvironment>PATH=%PATH%;C:\cygwin\bin</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <LocalDebuggerEnvironment>PATH=%PATH%;C:\cygwin\bin</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>set Path=C:\cygwin\bin%3b%PATH% &amp;&amp; make.exe</NMakeBuildCommandLine>
+    <NMakeOutput>bin\uscc.exe</NMakeOutput>
+    <NMakeCleanCommandLine>set Path=C:\cygwin\bin%3b%PATH% &amp;&amp; make.exe clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <IncludePath>../llvm/include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>set Path=C:\cygwin\bin%3b%PATH% &amp;&amp; make.exe</NMakeBuildCommandLine>
+    <NMakeOutput>bin\uscc.exe</NMakeOutput>
+    <NMakeCleanCommandLine>set Path=C:\cygwin\bin%3b%PATH% &amp;&amp; make.exe clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <IncludePath>../llvm/include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

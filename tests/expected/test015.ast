@@ -1,0 +1,22 @@
+Program:
+---Function: int multiply
+------ArgDecl: int x
+------ArgDecl: int y
+------CompoundStmt:
+---------ReturnStmt:
+------------BinaryMath *:
+---------------IdentExpr: x
+---------------IdentExpr: y
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------FuncExpr: multiply
+---------------ConstantExpr: 5
+---------------ConstantExpr: 6
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: 5 * 6 = %d
+
+---------------IdentExpr: x
+---------ReturnStmt:
+------------ConstantExpr: 0

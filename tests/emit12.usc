@@ -1,0 +1,64 @@
+// emit11.usc
+// Tests nested if/else if/else
+// Expected output:
+// 1 is not a multiple of 2, 3 or 5.
+// 2 is a multiple of 2.
+// 3 is a multiple of 3.
+// 4 is a multiple of 2.
+// 5 is a multiple of 5.
+// 6 is a multiple of 2.
+// 6 is a multiple of 3.
+// 7 is not a multiple of 2, 3 or 5.
+// 8 is a multiple of 2.
+// 9 is a multiple of 3.
+// 10 is a multiple of 2.
+// 10 is a multiple of 5.
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 1;
+	
+	while (x < 11)
+	{
+		printf("%d", x);
+		
+		// This is, of course, not the most efficient way
+		// to write this code.
+		if (!(x % 2))
+		{
+			printf(" is a multiple of %d.\n", 2);
+			if (!(x % 3))
+			{
+				printf("%d is a multiple of %d.\n", x, 3);
+			}
+			
+			if (!(x % 5))
+			{
+				printf("%d is a multiple of %d.\n", x, 5);
+			}
+		}
+		else if (!(x % 3))
+		{
+			printf(" is a multiple of %d.\n", 3);
+		}
+		else if (!(x % 5))
+		{
+			printf(" is a multiple of %d.\n", 5);
+		}
+		else
+		{
+			printf(" is not a multiple of 2, 3 or 5.\n");
+		}
+		
+		++x;
+	}
+	
+	return 0;
+}

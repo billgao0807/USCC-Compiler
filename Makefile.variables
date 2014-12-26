@@ -1,0 +1,23 @@
+ifeq ($(OS),Windows_NT)
+EXEC = uscc.exe
+else
+EXEC = uscc
+endif
+
+ifeq ($(OS),Windows_NT)
+CXX = g++
+else
+CXX = clang++ 
+endif
+
+CXXFLAGS = -std=c++11 -O2
+
+DBGFLAGS =  -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
+
+LDFLAGS = -lcurses -ldl -lpthread -lLLVMX86Disassembler -lLLVMX86AsmParser -lLLVMX86CodeGen -lLLVMSelectionDAG -lLLVMAsmPrinter -lLLVMMCParser -lLLVMCodeGen -lLLVMScalarOpts -lLLVMInstCombine -lLLVMTransformUtils -lLLVMipa -lLLVMAnalysis -lLLVMTarget -lLLVMX86Desc -lLLVMX86Info -lLLVMX86AsmPrinter -lLLVMMC -lLLVMObject -lLLVMX86Utils -lLLVMCore -lLLVMSupport -lLLVMBitWriter
+
+WFLAGS = -Woverloaded-virtual -Wcast-qual
+
+CXXFLAGS += $(WFLAGS) $(DBGFLAGS)
+
+DEBUG = 1

@@ -1,0 +1,4 @@
+semant03e.usc:21:13: error: Use of undeclared identifier 'y'
+	return x + y;
+	           ^
+1 Error(s)

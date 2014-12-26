@@ -1,0 +1,13 @@
+test003.usc:23:11: error: Expected type int in return statement
+			return "Hello world!";
+			       ^
+test003.usc:24:12: error: Use of undeclared identifier 'x'
+			return (x);
+			        ^
+test003.usc:25:10: error: Invalid empty return in non-void function
+			return;
+			      ^
+test003.usc:28:1: error: USC requires non-void functions to end with a return
+}
+^
+4 Error(s)

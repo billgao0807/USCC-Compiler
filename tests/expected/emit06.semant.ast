@@ -1,0 +1,38 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 97
+---------Decl: char a
+------------ToCharExpr: 
+---------------IdentExpr: x
+---------Decl: int y
+------------ToIntExpr: 
+---------------IdentExpr: a
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------BinaryCmp ==:
+------------------IdentExpr: x
+------------------ToIntExpr: 
+---------------------IdentExpr: a
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------IdentExpr: y
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %c
+
+---------------ToIntExpr: 
+------------------IncExpr: a
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %c
+
+---------------ToIntExpr: 
+------------------DecExpr: a
+---------ReturnStmt:
+------------ConstantExpr: 0

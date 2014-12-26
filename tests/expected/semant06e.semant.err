@@ -1,0 +1,4 @@
+semant06e.usc:16:6: error: Invalid redeclaration of identifier 'abc'
+	int abc = 5;
+	    ^
+1 Error(s)

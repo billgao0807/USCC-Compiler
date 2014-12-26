@@ -1,0 +1,25 @@
+// opt05.usc
+// Tests basic loop invariant code motion
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int i = 10;
+	char str[] = "HELLO WORLD!";
+	char letter = str[1];
+	
+	while (i > 0)
+	{
+		char result = letter + 32;
+		printf("%c\n", result);
+		--i;
+	}
+
+	return 0;
+}

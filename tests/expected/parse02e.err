@@ -1,0 +1,19 @@
+parse02e.usc:11:6: error: Function name 123 is invalid
+void 123()
+     ^
+parse02e.usc:19:17: error: Additional function argument must follow a comma.
+int func2(int a,)
+                ^
+parse02e.usc:24:1: error: Missing argument declaration for function func3
+{
+^
+parse02e.usc:27:14: error: Unnamed function parameters are not allowed
+int func4(int)
+             ^
+parse02e.usc:31:14: error: Unnamed function parameters are not allowed
+int func5(int[)
+             ^
+parse02e.usc:37:1: error: Expected: ) but saw: {
+{
+^
+6 Error(s)

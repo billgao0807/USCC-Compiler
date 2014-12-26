@@ -1,0 +1,39 @@
+// parse02e.usc
+// Function parse errors
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+void 123()
+{
+}
+
+void main()
+{
+}
+
+int func2(int a,)
+{
+}
+
+int func3
+{
+}
+
+int func4(int)
+{
+}
+
+int func5(int[)
+{
+
+}
+
+int func6(
+{
+}
+

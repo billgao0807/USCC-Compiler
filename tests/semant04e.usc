@@ -1,0 +1,18 @@
+// semant04e.usc
+// Tests undefined identifier
+// in an assign statement.
+// Expected: Error on line 10 for "z"
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 5;
+	int y = 7;
+	z = x + y;
+}

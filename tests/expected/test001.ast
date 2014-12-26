@@ -1,0 +1,25 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 5
+---------Decl: char abc
+------------ConstantExpr: 97
+---------Decl: int y
+------------ConstantExpr: -2424235
+---------Decl: char[13] str
+------------StringExpr: Hello World!
+---------IfStmt: 
+------------BinaryCmp ==:
+---------------IdentExpr: x
+---------------ConstantExpr: 5
+------------CompoundStmt:
+---------------WhileStmt
+------------------BinaryCmp >:
+---------------------IdentExpr: x
+---------------------ConstantExpr: 5
+------------------CompoundStmt:
+---------------------ExprStmt
+------------------------DecExpr: x
+---------ReturnStmt:
+------------ConstantExpr: 0

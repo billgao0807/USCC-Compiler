@@ -1,0 +1,21 @@
+// Test006.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | ReturnStmt
+// Expr --> Term
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return (20 / 10 * 2 % 3) / 16;
+}

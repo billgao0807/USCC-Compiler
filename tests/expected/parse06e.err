@@ -1,0 +1,28 @@
+parse06e.usc:13:5: error: Binary operation || requires two operands.
+	5||;
+	   ^
+parse06e.usc:14:5: error: Binary operation && requires two operands.
+	5&&if;
+	   ^
+parse06e.usc:15:5: error: Binary operation < requires two operands.
+	x <;
+	   ^
+parse06e.usc:16:5: error: Binary operation + requires two operands.
+	y +;
+	   ^
+parse06e.usc:17:4: error: ! must be followed by an expression.
+	(!);
+	  ^
+parse06e.usc:18:4: error: Valid expression required inside [ ].
+	a[];
+	  ^
+parse06e.usc:20:6: error: Comma must be followed by expression in function call
+	c(e,);
+	    ^
+parse06e.usc:21:3: error: & must be followed by an identifier.
+	&;
+	 ^
+parse06e.usc:22:5: error: Missing required subscript expression.
+	&a[];
+	   ^
+9 Error(s)

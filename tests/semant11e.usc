@@ -1,0 +1,18 @@
+// semant11e.usc
+// Return tests
+// Should have two errors
+// (the first two return statements)
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	return "String return!";
+	return;
+	return 0;
+}

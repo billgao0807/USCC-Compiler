@@ -1,0 +1,39 @@
+// emit03.usc
+// Tests external printf call
+// Tests basic math expressions
+// Note: The emitted code will calculate the result
+// of the operations, because the math functions do so
+// automatically
+// Expected output:
+// 5
+// 25
+// 1
+// 50
+// 0
+// 1
+// 0
+// 1
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	// Math expressions
+	printf("%d\n", 5);
+	printf("%d\n", 5 * 5);
+	printf("%d\n", 5 / 5);
+	printf("%d\n", 100 - 50);
+	
+	// Comparsion expressions
+	printf("%d\n", 5 == 10);
+	printf("%d\n", 5 != 10);
+	printf("%d\n", 5 > 10);
+	printf("%d\n", 5 < 10);
+	
+	return 0;
+}

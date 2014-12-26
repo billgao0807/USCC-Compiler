@@ -1,0 +1,131 @@
+Program:
+---Function: int partition
+------ArgDecl: char[] array
+------ArgDecl: int left
+------ArgDecl: int right
+------ArgDecl: int pivotIdx
+------CompoundStmt:
+---------Decl: char pivotVal
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------IdentExpr: pivotIdx
+---------Decl: int storeIdx
+------------IdentExpr: left
+---------Decl: int i
+------------IdentExpr: left
+---------Decl: char temp
+---------AssignStmt: temp
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------IdentExpr: pivotIdx
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------IdentExpr: pivotIdx
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------IdentExpr: right
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------IdentExpr: right
+------------IdentExpr: temp
+---------WhileStmt
+------------BinaryCmp <:
+---------------IdentExpr: i
+---------------IdentExpr: right
+------------CompoundStmt:
+---------------IfStmt: 
+------------------BinaryCmp <:
+---------------------ArrayExpr: 
+------------------------ArraySub: array
+---------------------------IdentExpr: i
+---------------------IdentExpr: pivotVal
+------------------CompoundStmt:
+---------------------AssignStmt: temp
+------------------------ArrayExpr: 
+---------------------------ArraySub: array
+------------------------------IdentExpr: i
+---------------------AssignArrayStmt:
+------------------------ArraySub: array
+---------------------------IdentExpr: i
+------------------------ArrayExpr: 
+---------------------------ArraySub: array
+------------------------------IdentExpr: storeIdx
+---------------------AssignArrayStmt:
+------------------------ArraySub: array
+---------------------------IdentExpr: storeIdx
+------------------------IdentExpr: temp
+---------------------ExprStmt
+------------------------IncExpr: storeIdx
+---------------ExprStmt
+------------------IncExpr: i
+---------AssignStmt: temp
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------IdentExpr: storeIdx
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------IdentExpr: storeIdx
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------IdentExpr: right
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------IdentExpr: right
+------------IdentExpr: temp
+---------ReturnStmt:
+------------IdentExpr: storeIdx
+---Function: void quicksort
+------ArgDecl: char[] array
+------ArgDecl: int left
+------ArgDecl: int right
+------CompoundStmt:
+---------Decl: int pivotIdx
+---------IfStmt: 
+------------BinaryCmp <:
+---------------IdentExpr: left
+---------------IdentExpr: right
+------------CompoundStmt:
+---------------AssignStmt: pivotIdx
+------------------BinaryMath +:
+---------------------IdentExpr: left
+---------------------BinaryMath /:
+------------------------BinaryMath -:
+---------------------------IdentExpr: right
+---------------------------IdentExpr: left
+------------------------ConstantExpr: 2
+---------------AssignStmt: pivotIdx
+------------------FuncExpr: partition
+---------------------IdentExpr: array
+---------------------IdentExpr: left
+---------------------IdentExpr: right
+---------------------IdentExpr: pivotIdx
+---------------ExprStmt
+------------------FuncExpr: quicksort
+---------------------IdentExpr: array
+---------------------IdentExpr: left
+---------------------BinaryMath -:
+------------------------IdentExpr: pivotIdx
+------------------------ConstantExpr: 1
+---------------ExprStmt
+------------------FuncExpr: quicksort
+---------------------IdentExpr: array
+---------------------BinaryMath +:
+------------------------IdentExpr: pivotIdx
+------------------------ConstantExpr: 1
+---------------------IdentExpr: right
+---Function: int main
+------CompoundStmt:
+---------Decl: char[36] letters
+------------StringExpr: thequickbrownfoxjumpsoverthelazydog
+---------ExprStmt
+------------FuncExpr: quicksort
+---------------IdentExpr: letters
+---------------ConstantExpr: 0
+---------------ConstantExpr: 34
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %s
+
+---------------IdentExpr: letters
+---------ReturnStmt:
+------------ConstantExpr: 0

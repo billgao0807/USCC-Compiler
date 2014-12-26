@@ -1,0 +1,80 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 1
+---------WhileStmt
+------------BinaryCmp <:
+---------------IdentExpr: x
+---------------ConstantExpr: 11
+------------CompoundStmt:
+---------------ExprStmt
+------------------FuncExpr: printf
+---------------------StringExpr: %d
+---------------------IdentExpr: x
+---------------IfStmt: 
+------------------NotExpr:
+---------------------BinaryMath %:
+------------------------IdentExpr: x
+------------------------ConstantExpr: 2
+------------------CompoundStmt:
+---------------------ExprStmt
+------------------------FuncExpr: printf
+---------------------------StringExpr:  is a multiple of %d.
+
+---------------------------ConstantExpr: 2
+---------------------IfStmt: 
+------------------------NotExpr:
+---------------------------BinaryMath %:
+------------------------------IdentExpr: x
+------------------------------ConstantExpr: 3
+------------------------CompoundStmt:
+---------------------------ExprStmt
+------------------------------FuncExpr: printf
+---------------------------------StringExpr: %d is a multiple of %d.
+
+---------------------------------IdentExpr: x
+---------------------------------ConstantExpr: 3
+---------------------IfStmt: 
+------------------------NotExpr:
+---------------------------BinaryMath %:
+------------------------------IdentExpr: x
+------------------------------ConstantExpr: 5
+------------------------CompoundStmt:
+---------------------------ExprStmt
+------------------------------FuncExpr: printf
+---------------------------------StringExpr: %d is a multiple of %d.
+
+---------------------------------IdentExpr: x
+---------------------------------ConstantExpr: 5
+------------------IfStmt: 
+---------------------NotExpr:
+------------------------BinaryMath %:
+---------------------------IdentExpr: x
+---------------------------ConstantExpr: 3
+---------------------CompoundStmt:
+------------------------ExprStmt
+---------------------------FuncExpr: printf
+------------------------------StringExpr:  is a multiple of %d.
+
+------------------------------ConstantExpr: 3
+---------------------IfStmt: 
+------------------------NotExpr:
+---------------------------BinaryMath %:
+------------------------------IdentExpr: x
+------------------------------ConstantExpr: 5
+------------------------CompoundStmt:
+---------------------------ExprStmt
+------------------------------FuncExpr: printf
+---------------------------------StringExpr:  is a multiple of %d.
+
+---------------------------------ConstantExpr: 5
+------------------------CompoundStmt:
+---------------------------ExprStmt
+------------------------------FuncExpr: printf
+---------------------------------StringExpr:  is not a multiple of 2, 3 or 5.
+
+---------------ExprStmt
+------------------IncExpr: x
+---------ReturnStmt:
+------------ConstantExpr: 0

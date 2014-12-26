@@ -1,0 +1,17 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x1
+---------Decl: int y1
+---------Decl: char b
+---------Decl: int x2
+------------ConstantExpr: 5
+---------Decl: int y2
+------------BinaryMath +:
+---------------IdentExpr: x2
+---------------ConstantExpr: 6
+---------Decl: char a
+------------ConstantExpr: 97
+---------Decl: int[10] int_array
+---------Decl: char[13] char_array
+------------StringExpr: Hello world!

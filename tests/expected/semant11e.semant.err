@@ -1,0 +1,7 @@
+semant11e.usc:15:9: error: Expected type int in return statement
+	return "String return!";
+	       ^
+semant11e.usc:16:8: error: Invalid empty return in non-void function
+	return;
+	      ^
+2 Error(s)

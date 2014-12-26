@@ -1,0 +1,34 @@
+test012.usc:28:6: error: Use of undeclared identifier 'z'
+	if (z == 2)
+	    ^
+test012.usc:31:6: error: Use of undeclared identifier 'x'
+	if (x == 5)
+	    ^
+test012.usc:34:3: error: Use of undeclared identifier 'y'
+		y = 7 + 8 * 2;
+		^
+test012.usc:36:11: error: Use of undeclared identifier 'x'
+	else if (x == 4)
+	         ^
+test012.usc:38:5: error: Use of undeclared identifier 'x'
+		--x;
+		  ^
+test012.usc:40:11: error: Use of undeclared identifier 'x'
+	else if (x == 3)
+	         ^
+test012.usc:42:3: error: Use of undeclared identifier 'y'
+		y = y * y;
+		^
+test012.usc:42:7: error: Use of undeclared identifier 'y'
+		y = y * y;
+		    ^
+test012.usc:42:11: error: Use of undeclared identifier 'y'
+		y = y * y;
+		        ^
+test012.usc:46:3: error: Use of undeclared identifier 'z'
+		z = 42;
+		^
+test012.usc:48:1: error: USC requires non-void functions to end with a return
+}
+^
+11 Error(s)

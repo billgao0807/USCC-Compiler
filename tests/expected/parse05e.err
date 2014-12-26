@@ -1,0 +1,25 @@
+parse05e.usc:17:9: error: Expected: ( but saw: ;
+	else if;
+	       ^
+parse05e.usc:19:10: error: = must be followed by an expression
+	if (x)a=;
+	        ^
+parse05e.usc:20:9: error: Not a valid expression inside parenthesis
+	if (x)();
+	       ^
+parse05e.usc:22:6: error: Invalid condition for if statement
+	if (;
+	    ^
+parse05e.usc:24:6: error: = must be followed by an expression
+	x = ;
+	    ^
+parse05e.usc:26:8: error: Invalid condition for while statement
+	while();
+	      ^
+parse05e.usc:27:8: error: Invalid condition for while statement
+	while(;
+	      ^
+parse05e.usc:29:10: error: Declarations are only allowed at the beginning of a scope block
+	while(x)int a;
+	        ^
+8 Error(s)

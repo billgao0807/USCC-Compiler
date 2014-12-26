@@ -1,0 +1,27 @@
+// Test001.usc
+// Tests lexical analysis
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int x = 5;
+	char abc = 'a';
+	int y = -2424235;
+	char str[] = "Hello World!";
+	
+	if (x == 5)
+	{
+		while (x > 5)
+		{
+			--x;
+		}
+	}
+	
+	return 0;
+}

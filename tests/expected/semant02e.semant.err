@@ -1,0 +1,4 @@
+semant02e.usc:17:6: error: Invalid redeclaration of identifier 'x'
+	int x;
+	    ^
+1 Error(s)

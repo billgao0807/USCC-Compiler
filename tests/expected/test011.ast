@@ -1,0 +1,33 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------ExprStmt
+------------IdentExpr: a
+---------ExprStmt
+------------ArrayExpr: 
+---------------ArraySub: array
+------------------ConstantExpr: 5
+---------AssignStmt: x
+------------ConstantExpr: 5
+---------AssignStmt: y
+------------ConstantExpr: 10
+---------AssignArrayStmt:
+------------ArraySub: array
+---------------ConstantExpr: 5
+------------ConstantExpr: 10
+---------WhileStmt
+------------BinaryCmp >:
+---------------IdentExpr: x
+---------------ConstantExpr: 0
+------------CompoundStmt:
+---------------ExprStmt
+------------------DecExpr: x
+---------------AssignStmt: y
+------------------BinaryMath +:
+---------------------IdentExpr: y
+---------------------BinaryMath *:
+------------------------IdentExpr: x
+------------------------ConstantExpr: 2
+---------WhileStmt
+------------ConstantExpr: 1
+------------NullStmt

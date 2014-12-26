@@ -1,0 +1,23 @@
+// semant06e.usc
+// Tests for scope conflict
+// between function parameters
+// and declarations
+// Expected error on line 9
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int myFunc(int abc)
+{
+	int abc = 5;
+	return abc * 5;
+}
+
+int main()
+{
+	return myFunc(10);
+}

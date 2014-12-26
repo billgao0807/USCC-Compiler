@@ -1,0 +1,28 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: int x
+------------ConstantExpr: 50
+---------Decl: char c
+------------ToCharExpr: 
+---------------BinaryMath +:
+------------------IdentExpr: x
+------------------ConstantExpr: 5
+---------Decl: char d
+------------ConstantExpr: 127
+---------Decl: int y
+---------AssignStmt: x
+------------ToIntExpr: 
+---------------IncExpr: d
+---------AssignStmt: y
+------------BinaryMath +:
+---------------ToIntExpr: 
+------------------IdentExpr: d
+---------------ConstantExpr: 50
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %d
+
+---------------IdentExpr: x
+---------ReturnStmt:
+------------ConstantExpr: 0

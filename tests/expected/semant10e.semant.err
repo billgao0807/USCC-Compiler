@@ -1,0 +1,16 @@
+semant10e.usc:16:14: error: Cannot perform op between type char[] and char[]
+	a = "Stuff" && "Stuff";
+	            ^
+semant10e.usc:17:14: error: Cannot perform op between type char[] and char[]
+	a = "Stuff" || "Stuff";
+	            ^
+semant10e.usc:18:14: error: Cannot perform op between type char[] and char[]
+	a = "Stuff" + "Stuff";
+	            ^
+semant10e.usc:19:14: error: Cannot perform op between type char[] and char[]
+	a = "Stuff" * "Stuff";
+	            ^
+semant10e.usc:20:4: error: Cannot assign an expression of type char[] to int
+	a = !"Stuff";
+	  ^
+5 Error(s)

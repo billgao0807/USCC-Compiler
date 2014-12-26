@@ -1,0 +1,42 @@
+// Test016.usc
+// Tests declaring functions that take
+// in arrays as arguments
+// Expected output:
+// 1,1,2,3,5
+// 10
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+void printArray(int array[], int size)
+{
+	int i = 0;
+	while (i < size - 1)
+	{
+		printf("%d,", array[i]);
+		++i;
+	}
+	printf("%d\n", array[i]);
+}
+
+int main()
+{
+	// This really makes me feel that
+	// USC needs initializer list support.
+	int array[5];
+	int x = 5;
+	array[0] = 1;
+	array[1] = 1;
+	array[2] = 2;
+	array[3] = 3;
+	array[4] = 5;
+	
+	printArray(array, 5);
+	x = 10;
+	printf("%d\n", x);
+	return 0;
+}

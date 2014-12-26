@@ -1,0 +1,40 @@
+// Test011.usc
+// Tests the following:
+// Stmt --> CompoundStmt
+//        | AssignStmt
+//        | WhileStmt
+//        | ReturnStmt
+//        | ExprStmt
+//        | NullStmt
+// Expr --> ...
+// AndTerm --> ...
+// RelExpr --> ...
+// NumExpr --> ...
+// Term --> ...
+// Value --> ...
+// Factor --> ...
+//   but not: id ( FuncCallArgs )
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	a;
+	array[5];
+	x = 5;
+	y = 10;
+	array[5] = 10;
+	
+	while (x > 0)
+	{
+		--x;
+		y = y + x * 2;
+	}
+	
+	while (1) ;
+}

@@ -1,0 +1,40 @@
+Program:
+---Function: void foo
+------ArgDecl: int x
+------CompoundStmt:
+---------Decl: int y
+------------ConstantExpr: 0
+---------AssignStmt: x
+------------BinaryMath /:
+---------------IdentExpr: y
+---------------ConstantExpr: 3
+---------ReturnStmt: (empty)
+---Function: int main
+------CompoundStmt:
+---------Decl: int a
+---------Decl: int b
+---------Decl: int c
+---------AssignStmt: a
+------------ConstantExpr: 5
+---------AssignStmt: b
+------------BinaryMath *:
+---------------IdentExpr: a
+---------------ConstantExpr: 2
+---------AssignStmt: c
+------------BinaryMath +:
+---------------IdentExpr: a
+---------------ConstantExpr: 4
+---------ExprStmt
+------------FuncExpr: foo
+---------------IdentExpr: a
+---------AssignStmt: c
+------------BinaryMath *:
+---------------IdentExpr: a
+---------------ConstantExpr: 6
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: c: %d
+
+---------------IdentExpr: c
+---------ReturnStmt:
+------------ConstantExpr: 0

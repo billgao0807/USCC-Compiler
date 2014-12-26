@@ -1,0 +1,4 @@
+semant01e.usc:16:9: error: Use of undeclared identifier 'x'
+	return x;
+	       ^
+1 Error(s)

@@ -1,0 +1,24 @@
+// parse06e.usc
+// Expression parse errors
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	5||;
+	5&&if;
+	x <;
+	y +;
+	(!);
+	a[];
+	b(y);
+	c(e,);
+	&;
+	&a[];
+	return 0;
+}

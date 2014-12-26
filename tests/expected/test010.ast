@@ -1,0 +1,20 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------WhileStmt
+------------BinaryCmp >:
+---------------IdentExpr: x
+---------------ConstantExpr: 0
+------------CompoundStmt:
+---------------ReturnStmt:
+------------------ConstantExpr: 5
+---------WhileStmt
+------------ConstantExpr: 1
+------------WhileStmt
+---------------ConstantExpr: 1
+---------------WhileStmt
+------------------ConstantExpr: 1
+------------------WhileStmt
+---------------------ConstantExpr: 1
+---------------------ReturnStmt:
+------------------------ConstantExpr: 0

@@ -1,0 +1,19 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------Decl: char[36] str
+------------StringExpr: thequickbrownfoxjumpsoverthelazydog
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %s
+
+---------------IdentExpr: str
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: %s
+
+---------------AddrOfArray:
+------------------ArraySub: str
+---------------------ConstantExpr: 8
+---------ReturnStmt:
+------------ConstantExpr: 0

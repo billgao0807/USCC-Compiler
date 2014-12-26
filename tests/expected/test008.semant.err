@@ -1,0 +1,13 @@
+test008.usc:23:9: error: Use of undeclared identifier 'a'
+	return a == b != c < d > 10;
+	       ^
+test008.usc:23:14: error: Use of undeclared identifier 'b'
+	return a == b != c < d > 10;
+	            ^
+test008.usc:23:19: error: Use of undeclared identifier 'c'
+	return a == b != c < d > 10;
+	                 ^
+test008.usc:23:23: error: Use of undeclared identifier 'd'
+	return a == b != c < d > 10;
+	                     ^
+4 Error(s)

@@ -1,0 +1,9 @@
+Program:
+---Function: int main
+------CompoundStmt:
+---------ExprStmt
+------------FuncExpr: printf
+---------------StringExpr: Hello world!
+
+---------ReturnStmt:
+------------ConstantExpr: 0

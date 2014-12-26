@@ -1,0 +1,27 @@
+// parse04e.usc
+// Statement parse errors
+//---------------------------------------------------------
+// Copyright (c) 2014, Sanjay Madhav
+// All rights reserved.
+//
+// This file is distributed under the BSD license.
+// See LICENSE.TXT for details.
+//---------------------------------------------------------
+
+int main()
+{
+	int;
+	int x = ;
+	x[] = 0;
+	x[5] =;
+	x = ;
+	int y = 0;
+	a =
+	y = 5;
+	if ()
+	{
+		
+	}
+	
+	return 0;
+}
