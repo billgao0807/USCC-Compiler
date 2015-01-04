@@ -7,7 +7,7 @@ The instructions on how to get started, as well as the instructions for the five
 
 When you fork this repo, make sure the fork permissions are set to **private**. Otherwise, anyone (including other students) will be able to see your code and potentially copy it.
 
-*Note*: If you are faculty at another university and interested in the assignments, you are free to use these assignments and be sure to contact me if you want access to the reference/solution code.
+*Note*: If you are faculty at another university and interested in the assignments, you are free to use these assignments. Be sure to contact me if you want access to the reference/solution code.
 
 Thanks to Dr. Changhee Jung at Virginia Tech for talking through some ideas, being a second set of eyes, as well as creating the Makefiles.
 
