@@ -6,7 +6,7 @@ xcuserdata
 docs/~*
 *.a
 *.o
-uscc
+bin/uscc
 *.ll
 *.stackdump
 *.opensdf
@@ -14,5 +14,5 @@ uscc
 *.suo
 Debug/
 *.user
-FlexLexer.cpp
+scan/FlexLexer.cpp
 .DS_Store
