@@ -57,9 +57,6 @@
     <None Include="tests\live01.usc">
       <Filter>tests</Filter>
     </None>
-    <None Include="tests\quicksort.bc">
-      <Filter>tests</Filter>
-    </None>
     <None Include="tests\quicksort.usc">
       <Filter>tests</Filter>
     </None>
@@ -106,9 +103,6 @@
       <Filter>tests</Filter>
     </None>
     <None Include="tests\ssa01.usc">
-      <Filter>tests</Filter>
-    </None>
-    <None Include="tests\test001.bc">
       <Filter>tests</Filter>
     </None>
     <None Include="tests\test001.usc">
@@ -184,6 +178,24 @@
       <Filter>tests</Filter>
     </None>
     <None Include="tests\opt07.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse01e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse02e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse03e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse04e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse05e.usc">
+      <Filter>tests</Filter>
+    </None>
+    <None Include="tests\parse06e.usc">
       <Filter>tests</Filter>
     </None>
   </ItemGroup>

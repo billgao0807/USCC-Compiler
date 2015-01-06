@@ -33,7 +33,12 @@
     <None Include="tests\opt05.usc" />
     <None Include="tests\opt06.usc" />
     <None Include="tests\opt07.usc" />
-    <None Include="tests\quicksort.bc" />
+    <None Include="tests\parse01e.usc" />
+    <None Include="tests\parse02e.usc" />
+    <None Include="tests\parse03e.usc" />
+    <None Include="tests\parse04e.usc" />
+    <None Include="tests\parse05e.usc" />
+    <None Include="tests\parse06e.usc" />
     <None Include="tests\quicksort.usc" />
     <None Include="tests\semant01.usc" />
     <None Include="tests\semant01e.usc" />
@@ -50,7 +55,6 @@
     <None Include="tests\semant11e.usc" />
     <None Include="tests\semant12e.usc" />
     <None Include="tests\ssa01.usc" />
-    <None Include="tests\test001.bc" />
     <None Include="tests\test001.usc" />
     <None Include="tests\test002.usc" />
     <None Include="tests\test003.usc" />
