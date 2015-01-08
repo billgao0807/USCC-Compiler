@@ -13,7 +13,7 @@
 //  This file is distributed under the BSD license.
 //  See LICENSE.TXT for details.
 //---------------------------------------------------------
-#include "passes.h"
+#include "Passes.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wconversion"
 #include <llvm/IR/Function.h>
