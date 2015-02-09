@@ -53,9 +53,6 @@ class SemantTests(unittest.TestCase):
 	
 	def test_Sem_007(self):
 		self.checkAST("test007")
-	
-	def test_Sem_013(self):
-		self.checkAST("test013")
 
 	def test_Sem_015(self):
 		self.checkAST("test015")
@@ -170,6 +167,9 @@ class SemantTests(unittest.TestCase):
 		
 	def test_SemErr_012(self):
 		self.checkError("test012")
+	
+	def test_SemErr_013(self):
+		self.checkError("test013")
 	
 	def test_SemErr_014(self):
 		self.checkError("test014")
