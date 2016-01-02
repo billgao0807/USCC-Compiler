@@ -50,6 +50,9 @@ int main(int argc, const char * argv[])
 			" set, you can specify -b, as well.",
 			"-b", "--bitcode");
 	opt.add("", false, 0, 0,
+			"Output symbol table to stdout.",
+			"-l", "--print-symbols");
+	opt.add("", false, 0, 0,
 			"Output LLVM IR to stdout.",
 			"-p", "--print-bc");
 	opt.add("", false, 0, 0,
@@ -88,14 +91,20 @@ int main(int argc, const char * argv[])
 	
 	const char* fileName = opt.lastArgs[0]->c_str();
 	std::ostream* astStream = nullptr;
+	bool outputSymbols = false;
 	if (opt.isSet("-a"))
 	{
 		astStream = &std::cout;
 	}
+
+	if (opt.isSet("-l"))
+	{
+		outputSymbols = true;
+	}
 	
 	try
 	{
-		parse::Parser parser(fileName, &std::cerr, astStream);
+		parse::Parser parser(fileName, &std::cerr, astStream, outputSymbols);
 		
 		if (!parser.IsValid())
 		{

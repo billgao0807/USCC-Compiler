@@ -44,7 +44,7 @@ class Parser
 public:
 	// Constructor takes in a file name and performs the parse
 	Parser(const char* fileName, std::ostream* errStream,
-		   std::ostream* ASTStream = nullptr);
+		   std::ostream* ASTStream, bool outputSymbols);
 	
 	// Destructor not virtual; I don't expect any inheritance
 	~Parser();
@@ -270,6 +270,9 @@ private:
 	
 	// Do we want to check for semantic errors?
 	bool mCheckSemant;
+
+	// Do we want to output the symbol table?
+	bool mOutputSymbols;
 };
 
 } // parse

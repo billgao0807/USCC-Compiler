@@ -27,6 +27,10 @@
 #include <llvm/IR/IRBuilder.h>
 #pragma clang diagnostic pop
 
+#include <vector>
+#include <algorithm>
+#include <ostream>
+
 using namespace uscc::parse;
 
 llvm::Type* Identifier::llvmType(bool treatArrayAsPtr /* = true */) noexcept
@@ -156,6 +160,16 @@ SymbolTable::ScopeTable* SymbolTable::enterScope()
 	return nullptr;
 }
 
+// Prints the symbol table to the specified stream
+void SymbolTable::print(std::ostream& output) const noexcept
+{
+	output << "Symbols:\n";
+	if (mCurrScope)
+	{
+		mCurrScope->print(output);
+	}
+}
+
 // Exits the current scope and moves the current scope back to
 // the previous scope table.
 void SymbolTable::exitScope()
@@ -246,6 +260,66 @@ void SymbolTable::ScopeTable::emitIR(CodeContext& ctx)
 	for (auto table : mChildren)
 	{
 		table->emitIR(ctx);
+	}
+}
+
+// Prints the scope table to the specified stream
+void SymbolTable::ScopeTable::print(std::ostream& output, int depth) const noexcept
+{
+	std::vector<Identifier*> idents;
+	for (const auto& sym : mSymbols)
+	{
+		idents.push_back(sym.second);
+	}
+
+	std::sort(idents.begin(), idents.end(), [](Identifier* a, Identifier* b) {
+		return a->getName() < b->getName();
+	});
+
+	for (const auto& ident : idents)
+	{
+		if (ident->getName()[0] == '@')
+		{
+			continue;
+		}
+
+		for (int i = 0; i < depth; i++)
+		{
+			output << "---";
+		}
+
+		switch (ident->getType())
+		{
+		case Type::Void:
+			output << "void ";
+			break;
+		case Type::Int:
+			output << "int ";
+			break;
+		case Type::Char:
+			output << "char ";
+			break;
+		case Type::IntArray:
+			output << "int[] ";
+			break;
+		case Type::CharArray:
+			output << "char[] ";
+			break;
+		case Type::Function:
+			output << "function ";
+			break;
+		default:
+			output << "unknown ";
+			break;
+		}
+
+		output << ident->getName();
+		output << '\n';
+	}
+
+	for (const auto& child : mChildren)
+	{
+		child->print(output, depth + 1);
 	}
 }
 

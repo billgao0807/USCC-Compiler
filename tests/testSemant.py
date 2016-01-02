@@ -27,7 +27,7 @@ class SemantTests(unittest.TestCase):
 		expectedStr = expectFile.read();
 		expectFile.close()
 		try:
-			resultStr = subprocess.check_output([uscc, "-a", fileName + ".usc"], stderr=subprocess.STDOUT)
+			resultStr = subprocess.check_output([uscc, "-a", "-l", fileName + ".usc"], stderr=subprocess.STDOUT)
 			self.assertMultiLineEqual(expectedStr, resultStr)
 		except subprocess.CalledProcessError as e:
 			self.fail("\n" + e.output)
@@ -38,7 +38,7 @@ class SemantTests(unittest.TestCase):
 		expectedStr = expectFile.read()
 		expectFile.close()
 		try:
-			resultStr = subprocess.check_output([uscc, "-a", fileName + ".usc"], stderr=subprocess.STDOUT)
+			resultStr = subprocess.check_output([uscc, "-a", "-l", fileName + ".usc"], stderr=subprocess.STDOUT)
 			self.assertMultiLineEqual(expectedStr, resultStr)
 		except subprocess.CalledProcessError as e:
 			outputStr = e.output

@@ -33,7 +33,7 @@ using std::make_shared;
 
 // Constructor takes in a file name and performs the parse
 Parser::Parser(const char* fileName, std::ostream* errStream,
-			   std::ostream* ASTStream)
+			   std::ostream* ASTStream, bool outputSymbols)
 : mCurrToken(Token::Unknown)
 , mFileName(fileName)
 , mFileStream(fileName)
@@ -44,6 +44,7 @@ Parser::Parser(const char* fileName, std::ostream* errStream,
 , mUnusedIdent(nullptr)
 , mNeedPrintf(false)
 , mCheckSemant(false) // PA2: Change to true
+, mOutputSymbols(outputSymbols)
 {
 	if (mFileStream.is_open())
 	{
@@ -421,6 +422,10 @@ shared_ptr<ASTProgram> Parser::parseProgram()
 		if (mASTStream)
 		{
 			retVal->printNode((*mASTStream));
+			if (mOutputSymbols)
+			{
+				mSymbols.print((*mASTStream));
+			}
 		}
 	}
 	

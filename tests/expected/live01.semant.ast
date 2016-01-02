@@ -38,3 +38,12 @@ Program:
 ---------------IdentExpr: c
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function foo
+function main
+function printf
+---int x
+---int y
+---int a
+---int b
+---int c

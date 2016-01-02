@@ -132,3 +132,21 @@ Program:
 ---------------IdentExpr: letters
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function partition
+function printf
+function quicksort
+---char[] array
+---int i
+---int left
+---int pivotIdx
+---char pivotVal
+---int right
+---int storeIdx
+---char temp
+---char[] array
+---int left
+---int pivotIdx
+---int right
+---char[] letters

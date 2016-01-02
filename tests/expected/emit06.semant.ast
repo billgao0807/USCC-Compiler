@@ -36,3 +36,9 @@ Program:
 ------------------DecExpr: a
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printf
+---char a
+---int x
+---int y

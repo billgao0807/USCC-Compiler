@@ -10,3 +10,7 @@ Program:
 ---------------IdentExpr: str
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printf
+---char[] str

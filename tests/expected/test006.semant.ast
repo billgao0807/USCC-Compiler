@@ -11,3 +11,6 @@ Program:
 ---------------------ConstantExpr: 2
 ------------------ConstantExpr: 3
 ---------------ConstantExpr: 16
+Symbols:
+function main
+function printf

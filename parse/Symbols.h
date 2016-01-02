@@ -157,6 +157,9 @@ public:
 	// the previous scope table.
 	void exitScope();
 
+	// Prints the symbol table to the specified stream
+	void print(std::ostream& output) const noexcept;
+
 	// Symbol table for a specific scope
 	class ScopeTable
 	{
@@ -180,7 +183,9 @@ public:
 		// to the start of the function
 		void emitIR(CodeContext& ctx);
 		
-		
+		// Prints the scope table to the specified stream
+		void print(std::ostream& output, int depth = 0) const noexcept;
+
 		ScopeTable* getParent()
 		{
 			return mParent;
@@ -196,6 +201,7 @@ public:
 		ScopeTable* mParent;
 	};
 	
+private:
 	// Pointer to the current scope table
 	ScopeTable* mCurrScope;
 };

@@ -66,3 +66,12 @@ Program:
 ---------------IdentExpr: x
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printArray
+function printf
+---int[] array
+---int i
+---int size
+---int[] array
+---int x

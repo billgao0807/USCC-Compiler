@@ -17,3 +17,7 @@ Program:
 ---------------------ConstantExpr: 8
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printf
+---char[] str

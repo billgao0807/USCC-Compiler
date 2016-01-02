@@ -14,3 +14,13 @@ Program:
 ---------------Decl: int c
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printf
+---int x
+---int y
+---int z
+------int b
+------int x
+---------int c
+---------int c

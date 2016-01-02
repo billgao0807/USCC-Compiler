@@ -27,3 +27,6 @@ Program:
 ------------------------ConstantExpr: 3
 ------------------------ConstantExpr: 5
 ------------------ConstantExpr: 2
+Symbols:
+function main
+function printf

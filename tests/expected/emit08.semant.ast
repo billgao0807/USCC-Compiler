@@ -19,3 +19,8 @@ Program:
 ---------------IdentExpr: x
 ---------ReturnStmt:
 ------------ConstantExpr: 0
+Symbols:
+function main
+function printf
+---int x
+------int y
