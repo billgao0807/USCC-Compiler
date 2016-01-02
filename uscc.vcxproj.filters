@@ -57,6 +57,9 @@
     <None Include="tests\live01.usc">
       <Filter>tests</Filter>
     </None>
+    <None Include="tests\quicksort.bc">
+      <Filter>tests</Filter>
+    </None>
     <None Include="tests\quicksort.usc">
       <Filter>tests</Filter>
     </None>

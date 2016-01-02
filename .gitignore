@@ -16,3 +16,4 @@ Debug/
 *.user
 scan/FlexLexer.cpp
 .DS_Store
+*.opendb
