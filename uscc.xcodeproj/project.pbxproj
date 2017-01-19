@@ -479,6 +479,7 @@
 					../llvm/include,
 				);
 				LIBRARY_SEARCH_PATHS = ../lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-D_DEBUG",
@@ -533,6 +534,7 @@
 					../llvm/include,
 				);
 				LIBRARY_SEARCH_PATHS = ../lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-D_DEBUG",
