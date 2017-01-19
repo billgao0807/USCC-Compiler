@@ -683,3 +683,4 @@ shared_ptr<ASTArgDecl> Parser::parseArgDecl()
 	
 	return retVal;
 }
+
