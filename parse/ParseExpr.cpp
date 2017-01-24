@@ -185,6 +185,17 @@ shared_ptr<ASTExpr> Parser::parseFactor()
 	if ((retVal = parseIdentFactor()))
 		;
 	// PA1: Add additional cases
+	else if ((retVal = parseParenFactor()))
+		;
+	else if ((retVal = parseConstantFactor()))
+		;
+	else if ((retVal = parseStringFactor()))
+		;
+	else if ((retVal = parseIncFactor()))
+		;
+	else if ((retVal = parseDecFactor()))
+		;
+	
 	
 	return retVal;
 }
@@ -195,6 +206,14 @@ shared_ptr<ASTExpr> Parser::parseParenFactor()
 	shared_ptr<ASTExpr> retVal;
 
 	// PA1: Implement
+	if (peekToken() == Token::LParen) {
+		consumeToken();
+		
+		if (!(retVal = parseExpr())) {
+			throw ParseExceptMsg("Not a valid expression inside parenthesis");
+		}
+		peekAndConsume(Token::RParen);
+	}
 	
 	return retVal;
 }
@@ -205,6 +224,11 @@ shared_ptr<ASTConstantExpr> Parser::parseConstantFactor()
 	shared_ptr<ASTConstantExpr> retVal;
 
 	// PA1: Implement
+	if (peekToken() == Token::Constant) {
+		//auto constant = mCurrToken;
+		retVal = make_shared<ASTConstantExpr>(getTokenTxt());
+		consumeToken();
+	}
 	
 	return retVal;
 }
@@ -215,6 +239,11 @@ shared_ptr<ASTStringExpr> Parser::parseStringFactor()
 	shared_ptr<ASTStringExpr> retVal;
 
 	// PA1: Implement
+	if (peekToken() == Token::String) {
+		//auto str = mCurrToken;
+		retVal = make_shared<ASTStringExpr>(getTokenTxt(), mStrings);
+		consumeToken();
+	}
 	
 	return retVal;
 }
@@ -463,6 +492,11 @@ shared_ptr<ASTExpr> Parser::parseIncFactor()
 	shared_ptr<ASTExpr> retVal;
 	
 	// PA1: Implement
+	if (peekToken() == Token::Inc) {
+		consumeToken();
+		retVal = make_shared<ASTIncExpr>(*getVariable(getTokenTxt()));
+		consumeToken();
+	}
 	
 	return retVal;
 }
@@ -473,8 +507,14 @@ shared_ptr<ASTExpr> Parser::parseDecFactor()
 	shared_ptr<ASTExpr> retVal;
 	
 	// PA1: Implement
-
+	if (peekToken() == Token::Dec) {
+		consumeToken();
+		retVal = make_shared<ASTDecExpr>(*getVariable(getTokenTxt()));
+		consumeToken();
+	}
+	
 	return retVal;
+
 }
 
 // & id [ Expr ]
