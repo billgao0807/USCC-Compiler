@@ -92,7 +92,7 @@ shared_ptr<ASTExpr> Parser::parseAndTerm()
 
 	// PA1: This should not directly check factor
 	// but instead implement the proper grammar rule
-	retVal = parseFactor();
+	retVal = parseTerm();
 	
 	return retVal;
 }
@@ -169,6 +169,11 @@ shared_ptr<ASTExpr> Parser::parseValue()
 	shared_ptr<ASTExpr> retVal;
 	
 	// PA1: Implement
+	if (peekAndConsume(Token::Not)) {
+		retVal = make_shared<ASTNotExpr>(parseFactor());
+	} else {
+		retVal = parseFactor();
+	}
 	
 	return retVal;
 }

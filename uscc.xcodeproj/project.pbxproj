@@ -44,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2700D3841E37E5BA002F9E11 /* expected */ = {isa = PBXFileReference; lastKnownFileType = folder; path = expected; sourceTree = "<group>"; };
 		920B541718AD6C61006E8E63 /* semant02.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = semant02.usc; sourceTree = "<group>"; };
 		9215512818AB304E0079D82E /* semant07e.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = semant07e.usc; sourceTree = "<group>"; };
 		9215512918AB34080079D82E /* semant08e.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = semant08e.usc; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 		92FECDBD189F7446005F28A3 /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				2700D3841E37E5BA002F9E11 /* expected */,
 				9299C6F51A3BD3E7007587A3 /* opt01.usc */,
 				9299C6F61A3BD764007587A3 /* opt02.usc */,
 				9299C6F71A3BD7B7007587A3 /* opt03.usc */,
