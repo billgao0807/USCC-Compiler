@@ -113,6 +113,7 @@ shared_ptr<ASTLogicalAnd> Parser::parseAndTermPrime(shared_ptr<ASTExpr> lhs)
 		
 		auto relExpr = parseRelExpr();
 		if (relExpr) retVal->setRHS(relExpr);
+		else throw OperandMissing(Token::And);
 		
 		auto andTermPrime = parseAndTermPrime(retVal);
 		if (andTermPrime) retVal = andTermPrime;
@@ -143,11 +144,13 @@ shared_ptr<ASTBinaryCmpOp> Parser::parseRelExprPrime(shared_ptr<ASTExpr> lhs)
 	// PA1: Implement
 	if (peekIsOneOf({Token::EqualTo, Token::NotEqual, Token::LessThan, Token::GreaterThan})) {
 		retVal = make_shared<ASTBinaryCmpOp>(peekToken());
+		Token::Tokens op = peekToken();
 		consumeToken();
 		retVal->setLHS(lhs);
 		
 		auto numExpr = parseNumExpr();
 		if (numExpr) retVal->setRHS(numExpr);
+		else throw OperandMissing(op);
 		
 		auto relExprPrime = parseRelExprPrime(retVal);
 		if (relExprPrime) retVal = relExprPrime;
@@ -186,6 +189,7 @@ shared_ptr<ASTBinaryMathOp> Parser::parseNumExprPrime(shared_ptr<ASTExpr> lhs)
 		
 		auto term = parseTerm();
 		if (term) retVal->setRHS(term);
+		else throw OperandMissing(Token::Plus);
 		
 		auto numExprPrime = parseNumExprPrime(retVal);
 		if (numExprPrime) retVal = numExprPrime;
@@ -236,7 +240,10 @@ shared_ptr<ASTExpr> Parser::parseValue()
 	
 	// PA1: Implement
 	if (peekAndConsume(Token::Not)) {
-		retVal = make_shared<ASTNotExpr>(parseFactor());
+		auto factor = parseFactor();
+		if (factor) retVal = make_shared<ASTNotExpr>(factor);
+		else throw ParseExceptMsg("! must be followed by an expression.");
+		
 	} else {
 		retVal = parseFactor();
 	}
@@ -265,6 +272,8 @@ shared_ptr<ASTExpr> Parser::parseFactor()
 	else if ((retVal = parseIncFactor()))
 		;
 	else if ((retVal = parseDecFactor()))
+		;
+	else if ((retVal = parseAddrOfArrayFactor()))
 		;
 	
 	
@@ -594,6 +603,27 @@ shared_ptr<ASTExpr> Parser::parseAddrOfArrayFactor()
 	shared_ptr<ASTExpr> retVal;
 	
 	// PA1: Implement
+	if (peekToken() == Token::Addr) {
+		consumeToken();
+		if (peekToken() == Token::Identifier) {
+			Identifier* id = getVariable(getTokenTxt());
+			consumeToken();
+			matchToken(Token::LBracket);
+			auto expr = parseExpr();
+			if (expr) {
+    matchToken(Token::RBracket);
+				shared_ptr<ASTArraySub> arraySub = make_shared<ASTArraySub>(*id, expr);
+				retVal = std::__1::make_shared<ASTArrayExpr>(arraySub);
+			} else {
+				throw ParseExceptMsg("Missing required subscript expression.");
+			}
+			
+		} else {
+			throw ParseExceptMsg("& must be followed by an identifier.");
+		}
+		
+	}
+	
 	
 	return retVal;
 }
