@@ -92,7 +92,12 @@ shared_ptr<ASTExpr> Parser::parseAndTerm()
 
 	// PA1: This should not directly check factor
 	// but instead implement the proper grammar rule
-	retVal = parseTerm();
+	if ((retVal = parseRelExpr())) {
+		auto andTermPrim = parseAndTermPrime(retVal);
+		if (andTermPrim) {
+			retVal = andTermPrim;
+		}
+	}
 	
 	return retVal;
 }
@@ -102,6 +107,17 @@ shared_ptr<ASTLogicalAnd> Parser::parseAndTermPrime(shared_ptr<ASTExpr> lhs)
 	shared_ptr<ASTLogicalAnd> retVal;
 
 	// PA1: Implement
+	if (peekAndConsume(Token::And)) {
+		retVal = make_shared<ASTLogicalAnd>();
+		retVal->setLHS(lhs);
+		
+		auto relExpr = parseRelExpr();
+		if (relExpr) retVal->setRHS(relExpr);
+		
+		auto andTermPrime = parseAndTermPrime(retVal);
+		if (andTermPrime) retVal = andTermPrime;
+		
+	}
 	
 	return retVal;
 }
@@ -112,6 +128,10 @@ shared_ptr<ASTExpr> Parser::parseRelExpr()
 	shared_ptr<ASTExpr> retVal;
 
 	// PA1: Implement
+	if ((retVal = parseNumExpr())) {
+		auto relExprPrime = parseRelExprPrime(retVal);
+		if (relExprPrime) retVal = relExprPrime;
+	}
 	
 	return retVal;
 }
@@ -121,6 +141,18 @@ shared_ptr<ASTBinaryCmpOp> Parser::parseRelExprPrime(shared_ptr<ASTExpr> lhs)
 	shared_ptr<ASTBinaryCmpOp> retVal;
 	
 	// PA1: Implement
+	if (peekIsOneOf({Token::EqualTo, Token::NotEqual, Token::LessThan, Token::GreaterThan})) {
+		retVal = make_shared<ASTBinaryCmpOp>(peekToken());
+		consumeToken();
+		retVal->setLHS(lhs);
+		
+		auto numExpr = parseNumExpr();
+		if (numExpr) retVal->setRHS(numExpr);
+		
+		auto relExprPrime = parseRelExprPrime(retVal);
+		if (relExprPrime) retVal = relExprPrime;
+		
+	}
 	
 	return retVal;
 }
@@ -132,6 +164,13 @@ shared_ptr<ASTExpr> Parser::parseNumExpr()
 	
 	// PA1: Implement
 	
+	if ((retVal = parseTerm())) {
+		auto numExprPrime = parseNumExprPrime(retVal);
+		if (numExprPrime) {
+			retVal = numExprPrime;
+		}
+	}
+	
 	return retVal;
 }
 
@@ -140,6 +179,18 @@ shared_ptr<ASTBinaryMathOp> Parser::parseNumExprPrime(shared_ptr<ASTExpr> lhs)
 	shared_ptr<ASTBinaryMathOp> retVal;
 
 	// PA1: Implement
+	if (peekIsOneOf({Token::Plus, Token::Minus})) {
+		retVal = make_shared<ASTBinaryMathOp>(peekToken());
+		consumeToken();
+		retVal->setLHS(lhs);
+		
+		auto term = parseTerm();
+		if (term) retVal->setRHS(term);
+		
+		auto numExprPrime = parseNumExprPrime(retVal);
+		if (numExprPrime) retVal = numExprPrime;
+		
+	}
 	
 	return retVal;
 }
@@ -150,6 +201,10 @@ shared_ptr<ASTExpr> Parser::parseTerm()
 	shared_ptr<ASTExpr> retVal;
 
 	// PA1: Implement
+	if ((retVal = parseValue())) {
+		auto termPrime = parseTermPrime(retVal);
+		if (termPrime) retVal = termPrime;
+	}
 	
 	return retVal;
 }
@@ -159,7 +214,18 @@ shared_ptr<ASTBinaryMathOp> Parser::parseTermPrime(shared_ptr<ASTExpr> lhs)
 	shared_ptr<ASTBinaryMathOp> retVal;
 
 	// PA1: Implement
-	
+	if (peekIsOneOf({Token::Mult, Token::Div, Token::Mod})) {
+		retVal = make_shared<ASTBinaryMathOp>(peekToken());
+		consumeToken();
+		retVal->setLHS(lhs);
+		
+		auto rhs = parseValue();
+		if (rhs) retVal->setRHS(rhs);
+		
+		auto newRetVal = parseTermPrime(retVal);
+		if (newRetVal) retVal = newRetVal;
+	}
+
 	return retVal;
 }
 
