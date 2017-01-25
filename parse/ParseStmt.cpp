@@ -195,15 +195,23 @@ shared_ptr<ASTStmt> Parser::parseStmt()
 	{
 		// NOTE: AssignStmt HAS to go before ExprStmt!!
 		// Read comments in AssignStmt for why.
+		shared_ptr<ASTExpr> expr;
 		if ((retVal = parseCompoundStmt()))
 			;
 		else if ((retVal = parseAssignStmt()))
 			;
 		// PA1: Add additional cases
+		else if ((retVal = parseIfStmt()))
+			;
+		else if ((retVal = parseWhileStmt()))
+			;
 		else if ((retVal = parseReturnStmt()))
 			;
-		
-		
+		else if ((retVal = parseExprStmt()))
+			;
+		else if ((retVal = parseNullStmt()))
+			;
+
 		else if (peekIsOneOf({Token::Key_int, Token::Key_char}))
 		{
 			throw ParseExceptMsg("Declarations are only allowed at the beginning of a scope block");
@@ -377,6 +385,25 @@ shared_ptr<ASTIfStmt> Parser::parseIfStmt()
 	shared_ptr<ASTIfStmt> retVal;
 	
 	// PA1: Implement
+	shared_ptr<ASTExpr> expr;
+	shared_ptr<ASTStmt> thenStmt;
+	shared_ptr<ASTStmt> elseStmt;
+	if (peekAndConsume(Token::Key_if)) {
+		matchToken(Token::LParen);
+		expr = parseExpr();
+		if (!expr) {
+			throw ParseExceptMsg("Invalid condition for if statement");
+		}
+		matchToken(Token::RParen);
+		thenStmt = parseStmt();
+		if (peekAndConsume(Token::Key_else)) {
+			elseStmt = parseStmt();
+		}
+		retVal = make_shared<ASTIfStmt>(expr,thenStmt,elseStmt);
+		
+		
+	}
+	
 	
 	return retVal;
 }
@@ -386,6 +413,19 @@ shared_ptr<ASTWhileStmt> Parser::parseWhileStmt()
 	shared_ptr<ASTWhileStmt> retVal;
 	
 	// PA1: Implement
+	
+	if (peekAndConsume(Token::Key_while)) {
+		matchToken(Token::LParen);
+		auto expr = parseExpr();
+		if (!expr) {
+			throw ParseExceptMsg("Invalid condition for while statement");
+		}
+		matchToken(Token::RParen);
+		retVal = make_shared<ASTWhileStmt>(expr,parseStmt());
+	}
+	
+	
+	
 	
 	return retVal;
 }
@@ -402,24 +442,26 @@ shared_ptr<ASTReturnStmt> Parser::parseReturnStmt()
 	}
 	
 	return retVal;
-	
-	/*
-	if (peekToken() == Token::Key_return){
-		consumeToken();
-		retVal = make_shared<ASTReturnStmt>(parseExpr());
-		matchToken(Token::SemiColon);
-	}
-	
-	return retVal;
-	 */
 }
 
+/**
+ ExptStmt = Expt;
+ It is called speculative so do not assume expr will return real expr.
+ 
+ @return <#return value description#>
+ */
 shared_ptr<ASTExprStmt> Parser::parseExprStmt()
 {
 	shared_ptr<ASTExprStmt> retVal;
 	
 	// PA1: Implement
 	
+	
+	auto expr = parseExpr();
+	if (expr) {
+		retVal = make_shared<ASTExprStmt>(expr);
+		matchToken(Token::SemiColon);
+	}
 	return retVal;
 }
 
@@ -428,6 +470,9 @@ shared_ptr<ASTNullStmt> Parser::parseNullStmt()
 	shared_ptr<ASTNullStmt> retVal;
 	
 	// PA1: Implement
-	
+	if (peekAndConsume(Token::SemiColon)) {
+		retVal = make_shared<ASTNullStmt>();
+	}
+
 	return retVal;
 }
