@@ -13,6 +13,6 @@ Thanks to Dr. Changhee Jung at Virginia Tech for talking through some ideas, bei
 
 ***
 
-Student Name(s):
+Student Name(s): Zhongyang Gao
 
-Student Email(s):
+Student Email(s): zhongyag@usc.edu
