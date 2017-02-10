@@ -53,7 +53,11 @@ shared_ptr<ASTDecl> Parser::parseDecl()
 			}
 			
 			
+			if (mSymbols.isDeclaredInScope(getTokenTxt())) {
+				reportSemantError("Invalid redeclaration of identifier '" + std::string(getTokenTxt())+ "'");
+			}
 			ident = mSymbols.createIdentifier(getTokenTxt());
+			
 			
 			consumeToken();
 			
@@ -114,7 +118,8 @@ shared_ptr<ASTDecl> Parser::parseDecl()
 			}
 			
 			ident->setType(declType);
-			
+			auto ori_col = mColNumber;
+			auto ori_line = mLineNumber;
 			shared_ptr<ASTExpr> assignExpr;
 			
 			// Optionally, this decl may have an assignment
@@ -133,6 +138,17 @@ shared_ptr<ASTDecl> Parser::parseDecl()
 				}
 				
 				// PA2: Type checks
+				
+				if (assignExpr && assignExpr->getType() == Type::Int && ident->getType() == Type::Char) {
+					assignExpr = intToChar(assignExpr);
+				}
+				else if (assignExpr && assignExpr->getType() == Type::Char && ident->getType() == Type::Int) {
+					assignExpr = charToInt(assignExpr);
+				}
+				else if (assignExpr && assignExpr->getType() != ident->getType()) {
+					reportSemantError("Cannot assign an expression of type " + std::string(getTypeText(assignExpr->getType())) + " to " + std::string(getTypeText(ident->getType())), ori_col, ori_line);
+				}
+		
 				
 				// If this is a character array, we need to do extra checks
 				if (ident->getType() == Type::CharArray)
@@ -250,12 +266,24 @@ shared_ptr<ASTCompoundStmt> Parser::parseCompoundStmt(bool isFuncBody)
 	// PA1: Implement
 	if (peekToken() == Token::LBrace) {
 		consumeToken();
+		if (!isFuncBody) mSymbols.enterScope();
 		retVal = std::make_shared<ASTCompoundStmt>();
 		while (auto decl = parseDecl()) {
 			retVal->addDecl(decl);
 		}
 		while (auto stmt = parseStmt()) {
 			retVal->addStmt(stmt);
+		}
+		if (!isFuncBody) mSymbols.exitScope();
+		auto lastSmt = std::dynamic_pointer_cast<ASTReturnStmt>(retVal->getLastStmt()) ;
+		if (isFuncBody && !lastSmt) {
+			if (mCurrReturnType == Type::Void) {
+				std::shared_ptr<ASTExpr> it = nullptr;
+				retVal->addStmt(std::make_shared<ASTReturnStmt>(it));
+			}
+			else {
+				reportSemantError("USC requires non-void functions to end with a return");
+			}
 		}
 		matchToken(Token::RBrace);
 	}
@@ -315,6 +343,9 @@ shared_ptr<ASTStmt> Parser::parseAssignStmt()
 		int col = mColNumber;
 		if (peekAndConsume(Token::Assign))
 		{
+			
+//			auto ori_col = mColNumber;
+//			auto ori_line = mLineNumber;
 			shared_ptr<ASTExpr> expr = parseExpr();
 			
 			if (!expr)
@@ -357,8 +388,13 @@ shared_ptr<ASTStmt> Parser::parseAssignStmt()
 			else
 			{
 				// PA2: Check for semantic errors
+				if (expr && expr->getType() == Type::Int && ident->getType() == Type::Char) expr = intToChar(expr);
+				else if (expr && expr->getType() == Type::Char && ident->getType() == Type::Int) expr = charToInt(expr);
+				else if (expr && expr->getType() != ident->getType()) reportSemantError("Cannot assign an expression of type " + std::string(getTypeText(expr->getType())) + " to " + std::string(getTypeText(ident->getType())), col);
+				else if (mSymbols.isDeclaredInScope(ident->getName().c_str()) && (ident->getType() == Type::CharArray || ident->getType() == Type::IntArray) ) reportSemantError("Reassignment of arrays is not allowed", col);
 				
 				retVal = make_shared<ASTAssignStmt>(*ident, expr);
+				
 			}
 			
 			matchToken(Token::SemiColon);
@@ -376,6 +412,7 @@ shared_ptr<ASTStmt> Parser::parseAssignStmt()
 			}
 		}
 	}
+
 	
 	return retVal;
 }
@@ -436,10 +473,17 @@ shared_ptr<ASTReturnStmt> Parser::parseReturnStmt()
 	
 	// PA1: Implement
 	if (peekAndConsume(Token::Key_return)) {
+		auto ori_col = mColNumber;
+		auto ori_line = mLineNumber;
 		auto expr = parseExpr();
+		if (expr && expr->getType() == Type::Int && mCurrReturnType == Type::Char) expr = intToChar(expr);
+		else if (expr && expr->getType() == Type::Char && mCurrReturnType == Type::Int) expr = charToInt(expr);
+		else if (expr && expr->getType() != mCurrReturnType) reportSemantError("Expected type " + std::string(getTypeText(mCurrReturnType)) + " in return statement", ori_col, ori_line);
+		else if (!expr && mCurrReturnType != Type::Void) reportSemantError("Invalid empty return in non-void function", ori_col, ori_line);
 		retVal = make_shared<ASTReturnStmt>(expr);
 		peekAndConsume(Token::SemiColon);
 	}
+	
 	
 	return retVal;
 }

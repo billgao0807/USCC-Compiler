@@ -114,11 +114,24 @@ void Identifier::writeTo(CodeContext& ctx, llvm::Value* value) noexcept
 SymbolTable::SymbolTable() noexcept
 {
 	// PA2: Implement
+	mCurrScope = new ScopeTable(nullptr);
+	Identifier *funcId = new Identifier("@@function");
+	funcId->setType(Type::Function);
+	Identifier *varId = new Identifier("@@variable");
+	varId->setType(Type::Int);
+	Identifier *prtId = new Identifier("printf");
+	prtId->setType(Type::Function);
+	
+	mCurrScope->addIdentifier(funcId);
+	mCurrScope->addIdentifier(varId);
+	mCurrScope->addIdentifier(prtId);
+	
 }
 
 SymbolTable::~SymbolTable() noexcept
 {
 	// PA2: Implement
+	delete mCurrScope;
 }
 
 // Returns true if this variable is already declared
@@ -128,8 +141,9 @@ SymbolTable::~SymbolTable() noexcept
 bool SymbolTable::isDeclaredInScope(const char* name) const noexcept
 {
 	// PA2: Implement
+	return mCurrScope->searchInScope(name);
 	
-	return false;
+//	return false;
 }
 
 // Creates the requested identifier, and returns a pointer
@@ -138,9 +152,12 @@ bool SymbolTable::isDeclaredInScope(const char* name) const noexcept
 // This means you should first check with isDeclaredInScope.
 Identifier* SymbolTable::createIdentifier(const char* name)
 {
-	Identifier* ident = new Identifier(name);
 	
+	Identifier* ident = new Identifier(name);
 	// PA2: Add to current scope table
+	if (!isDeclaredInScope(name)) {
+		mCurrScope->addIdentifier(ident);
+	}
 	
 	return ident;
 }
@@ -150,14 +167,16 @@ Identifier* SymbolTable::createIdentifier(const char* name)
 Identifier* SymbolTable::getIdentifier(const char* name)
 {
 	// PA2: Implement properly
-	return new Identifier(name);
+	
+	return mCurrScope->search(name);
 }
 
 // Enters a new scope, and returns a pointer to this scope table
 SymbolTable::ScopeTable* SymbolTable::enterScope()
 {
 	// PA2: Implement
-	return nullptr;
+	mCurrScope = new ScopeTable(mCurrScope);
+	return mCurrScope;
 }
 
 // Prints the symbol table to the specified stream
@@ -175,23 +194,35 @@ void SymbolTable::print(std::ostream& output) const noexcept
 void SymbolTable::exitScope()
 {
 	// PA2: Implement
+	if (mCurrScope->getParent()) mCurrScope = mCurrScope->getParent();
 }
 
 SymbolTable::ScopeTable::ScopeTable(ScopeTable* parent) noexcept
 : mParent(parent)
 {
 	// PA2: Implement
+	if (parent)parent->mChildren.push_back(this);
+	
 }
 
 SymbolTable::ScopeTable::~ScopeTable() noexcept
 {
 	// PA2: Implement
+	for (auto it = mSymbols.begin(); it != mSymbols.end(); ++it ) {
+		delete it->second;
+	}
+	
+	for (auto it = mChildren.begin(); it != mChildren.end(); ++it) {
+		delete *it;
+	}
+	
 }
 
 // Adds the requested identifier to the table
 void SymbolTable::ScopeTable::addIdentifier(Identifier* ident)
 {
 	// PA2: Implement
+	if(ident)mSymbols.insert({ident->getName(), ident});
 }
 
 // Searches this scope for an identifier with
@@ -199,7 +230,12 @@ void SymbolTable::ScopeTable::addIdentifier(Identifier* ident)
 Identifier* SymbolTable::ScopeTable::searchInScope(const char* name) noexcept
 {
 	// PA2: Implement
-	return nullptr;
+	auto symbol = mSymbols.find(name);
+	if (symbol == mSymbols.end()) {
+		return nullptr;
+	} else {
+		return symbol->second;
+	}
 }
 
 // Searches this scope first, and if not found searches
@@ -207,8 +243,13 @@ Identifier* SymbolTable::ScopeTable::searchInScope(const char* name) noexcept
 Identifier* SymbolTable::ScopeTable::search(const char* name) noexcept
 {
 	// PA2: Implement
-	
-	return nullptr;
+	auto symbol = searchInScope(name);
+	if (symbol) {
+		return symbol;
+	} else {
+		if(getParent())return getParent()->search(name);
+		else return nullptr;
+	}
 }
 
 void SymbolTable::ScopeTable::emitIR(CodeContext& ctx)

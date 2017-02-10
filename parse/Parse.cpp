@@ -43,18 +43,18 @@ Parser::Parser(const char* fileName, std::ostream* errStream,
 , mColNumber(1)
 , mUnusedIdent(nullptr)
 , mNeedPrintf(false)
-, mCheckSemant(false) // PA2: Change to true
+, mCheckSemant(true) // PA2: Change to true
 , mOutputSymbols(outputSymbols)
 {
 	if (mFileStream.is_open())
 	{
 		mLexer = new yyFlexLexer(&mFileStream);
-				
+		
 		try
 		{
 			// Get the first token
 			consumeToken();
-
+			
 			// Now start the parse
 			mRoot = parseProgram();
 		}
@@ -174,7 +174,7 @@ bool Parser::peekAndConsume(Token::Tokens desired)
 	
 	return false;
 }
-	
+
 // Returns true if the current token matches one of the tokens
 // in the list.
 bool Parser::peekIsOneOf(const std::initializer_list<Token::Tokens>& list) noexcept
@@ -262,7 +262,7 @@ void Parser::consumeUntil(const std::initializer_list<Token::Tokens>& list) noex
 	}
 	while (mCurrToken != Token::EndOfFile);
 }
-			
+
 // Helper functions to report syntax errors
 void Parser::reportError(const ParseExcept& except) noexcept
 {
@@ -270,12 +270,12 @@ void Parser::reportError(const ParseExcept& except) noexcept
 	except.printException(errStrm);
 	mErrors.push_back(std::make_shared<Error>(errStrm.str(), mLineNumber, mColNumber));
 }
-			
+
 void Parser::reportError(const std::string& msg) noexcept
 {
 	mErrors.push_back(std::make_shared<Error>(msg, mLineNumber, mColNumber));
 }
-	
+
 void Parser::reportSemantError(const std::string& msg, int colOverride, int lineOverride) noexcept
 {
 	if (mCheckSemant)
@@ -351,10 +351,13 @@ void Parser::displayErrors() noexcept
 Identifier* Parser::getVariable(const char* name) noexcept
 {
 	// PA2: Implement properly
-	
-	Identifier* ident = mSymbols.createIdentifier(name);
-	
+	Identifier *ident = mSymbols.getIdentifier(name);
+	if (!ident) {
+		ident = mSymbols.getIdentifier("@@variable");
+		reportSemantError("Use of undeclared identifier \'" + std::string(name) + "\'", mColNumber, mLineNumber);
+	}
 	return ident;
+	
 }
 
 const char* Parser::getTypeText(Type type) const noexcept
@@ -384,6 +387,16 @@ std::shared_ptr<ASTExpr> Parser::charToInt(std::shared_ptr<ASTExpr> expr) noexce
 	std::shared_ptr<ASTExpr> retVal = expr;
 	
 	// PA2: Implement
+	if(expr && expr->getType() == Type::Char) {
+		auto constExpr = std::dynamic_pointer_cast<ASTConstantExpr>(expr);
+		if (constExpr) {
+			constExpr->changeToInt();
+			retVal = constExpr;
+		} else {
+			auto other = std::__1::make_shared<ASTToIntExpr>(expr);
+			retVal = other;
+		}
+	}
 	
 	return retVal;
 }
@@ -394,6 +407,21 @@ std::shared_ptr<ASTExpr> Parser::intToChar(std::shared_ptr<ASTExpr> expr) noexce
 	std::shared_ptr<ASTExpr> retVal = expr;
 	
 	// PA2: Implement
+	if(expr && expr->getType() == Type::Int) {
+		auto toIntExpr = std::dynamic_pointer_cast<ASTToIntExpr>(expr);
+		if (toIntExpr) retVal = toIntExpr->getChild();
+		else {
+			auto constExpr = std::dynamic_pointer_cast<ASTConstantExpr>(expr);
+			if (constExpr) {
+				constExpr->changeToChar();
+				retVal = constExpr;
+			} else {
+				auto other = std::__1::make_shared<ASTToCharExpr>(expr);
+				retVal = other;
+			}
+		}
+	}
+	
 	
 	return retVal;
 }
@@ -431,7 +459,7 @@ shared_ptr<ASTProgram> Parser::parseProgram()
 	
 	return retVal;
 }
-	
+
 shared_ptr<ASTFunction> Parser::parseFunction()
 {
 	shared_ptr<ASTFunction> retVal;
@@ -617,7 +645,7 @@ shared_ptr<ASTFunction> Parser::parseFunction()
 	
 	return retVal;
 }
-	
+
 shared_ptr<ASTArgDecl> Parser::parseArgDecl()
 {
 	shared_ptr<ASTArgDecl> retVal;
@@ -683,4 +711,4 @@ shared_ptr<ASTArgDecl> Parser::parseArgDecl()
 	
 	return retVal;
 }
-
+	

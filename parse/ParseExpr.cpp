@@ -55,6 +55,7 @@ shared_ptr<ASTLogicalOr> Parser::parseExprPrime(shared_ptr<ASTExpr> lhs)
 	// Must be ||
 	if (peekToken() == Token::Or)
 	{
+		auto col = mColNumber;
 		// Make the binary cmp op
 		Token::Tokens op = peekToken();
 		retVal = make_shared<ASTLogicalOr>();
@@ -73,6 +74,7 @@ shared_ptr<ASTLogicalOr> Parser::parseExprPrime(shared_ptr<ASTExpr> lhs)
 		retVal->setRHS(rhs);
 		
 		// PA2: Finalize op
+		if (!retVal->finalizeOp()) reportSemantError("Cannot perform op between type " + std::string(getTypeText(lhs->getType())) + " and " + std::string(getTypeText(rhs->getType())), col);
 		
 		// See comment in parseTermPrime if you're confused by this
 		shared_ptr<ASTLogicalOr> exprPrime = parseExprPrime(retVal);
@@ -107,13 +109,18 @@ shared_ptr<ASTLogicalAnd> Parser::parseAndTermPrime(shared_ptr<ASTExpr> lhs)
 	shared_ptr<ASTLogicalAnd> retVal;
 
 	// PA1: Implement
+	auto col = mColNumber;
 	if (peekAndConsume(Token::And)) {
 		retVal = make_shared<ASTLogicalAnd>();
 		retVal->setLHS(lhs);
 		
+		
+		
 		auto relExpr = parseRelExpr();
 		if (relExpr) retVal->setRHS(relExpr);
 		else throw OperandMissing(Token::And);
+		
+		if (!retVal->finalizeOp()) reportSemantError("Cannot perform op between type " + std::string(getTypeText(lhs->getType())) + " and " + std::string(getTypeText(relExpr->getType())), col);
 		
 		auto andTermPrime = parseAndTermPrime(retVal);
 		if (andTermPrime) retVal = andTermPrime;
@@ -145,12 +152,19 @@ shared_ptr<ASTBinaryCmpOp> Parser::parseRelExprPrime(shared_ptr<ASTExpr> lhs)
 	if (peekIsOneOf({Token::EqualTo, Token::NotEqual, Token::LessThan, Token::GreaterThan})) {
 		retVal = make_shared<ASTBinaryCmpOp>(peekToken());
 		Token::Tokens op = peekToken();
+		
+		auto col = mColNumber;
+		
 		consumeToken();
 		retVal->setLHS(lhs);
 		
 		auto numExpr = parseNumExpr();
 		if (numExpr) retVal->setRHS(numExpr);
 		else throw OperandMissing(op);
+		
+		if (!retVal->finalizeOp()) {
+			reportSemantError("Cannot perform op between type " + std::string(getTypeText(lhs->getType())) + " and " + std::string(getTypeText(numExpr->getType())), col);
+		}
 		
 		auto relExprPrime = parseRelExprPrime(retVal);
 		if (relExprPrime) retVal = relExprPrime;
@@ -184,6 +198,9 @@ shared_ptr<ASTBinaryMathOp> Parser::parseNumExprPrime(shared_ptr<ASTExpr> lhs)
 	// PA1: Implement
 	if (peekIsOneOf({Token::Plus, Token::Minus})) {
 		retVal = make_shared<ASTBinaryMathOp>(peekToken());
+		
+		auto col = mColNumber;
+		
 		consumeToken();
 		retVal->setLHS(lhs);
 		
@@ -191,9 +208,13 @@ shared_ptr<ASTBinaryMathOp> Parser::parseNumExprPrime(shared_ptr<ASTExpr> lhs)
 		if (term) retVal->setRHS(term);
 		else throw OperandMissing(Token::Plus);
 		
+		if (!retVal->finalizeOp()) {
+			reportSemantError("Cannot perform op between type " + std::string(getTypeText(lhs->getType())) + " and " + std::string(getTypeText(term->getType())), col);
+		
 		auto numExprPrime = parseNumExprPrime(retVal);
 		if (numExprPrime) retVal = numExprPrime;
 		
+		}
 	}
 	
 	return retVal;
@@ -220,14 +241,22 @@ shared_ptr<ASTBinaryMathOp> Parser::parseTermPrime(shared_ptr<ASTExpr> lhs)
 	// PA1: Implement
 	if (peekIsOneOf({Token::Mult, Token::Div, Token::Mod})) {
 		retVal = make_shared<ASTBinaryMathOp>(peekToken());
+		
+		auto col = mColNumber;
+		
 		consumeToken();
 		retVal->setLHS(lhs);
 		
 		auto rhs = parseValue();
 		if (rhs) retVal->setRHS(rhs);
 		
+		if (!retVal->finalizeOp()) {
+			reportSemantError("Cannot perform op between type " + std::string(getTypeText(lhs->getType())) + " and " + std::string(getTypeText(rhs->getType())), col);
+		}
+		
 		auto newRetVal = parseTermPrime(retVal);
 		if (newRetVal) retVal = newRetVal;
+		
 	}
 
 	return retVal;
@@ -563,6 +592,10 @@ shared_ptr<ASTExpr> Parser::parseIdentFactor()
 		}
 	}
 	
+	if (retVal && retVal->getType() == Type::Char){
+		retVal = charToInt(retVal);
+	}
+	
 	return retVal;
 }
 
@@ -575,7 +608,12 @@ shared_ptr<ASTExpr> Parser::parseIncFactor()
 	if (peekToken() == Token::Inc) {
 		consumeToken();
 		retVal = make_shared<ASTIncExpr>(*getVariable(getTokenTxt()));
+
 		consumeToken();
+	}
+	
+	if (retVal && retVal->getType() == Type::Char){
+		retVal = charToInt(retVal);
 	}
 	
 	return retVal;
@@ -590,7 +628,12 @@ shared_ptr<ASTExpr> Parser::parseDecFactor()
 	if (peekToken() == Token::Dec) {
 		consumeToken();
 		retVal = make_shared<ASTDecExpr>(*getVariable(getTokenTxt()));
+
 		consumeToken();
+	}
+	
+	if (retVal && retVal->getType() == Type::Char){
+		retVal = charToInt(retVal);
 	}
 	
 	return retVal;
@@ -613,7 +656,7 @@ shared_ptr<ASTExpr> Parser::parseAddrOfArrayFactor()
 			if (expr) {
     matchToken(Token::RBracket);
 				shared_ptr<ASTArraySub> arraySub = make_shared<ASTArraySub>(*id, expr);
-				retVal = std::__1::make_shared<ASTArrayExpr>(arraySub);
+				retVal = std::__1::make_shared<ASTAddrOfArray>(arraySub);
 			} else {
 				throw ParseExceptMsg("Missing required subscript expression.");
 			}

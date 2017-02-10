@@ -27,6 +27,10 @@ using namespace uscc::parse;
 bool ASTLogicalAnd::finalizeOp() noexcept
 {
 	// PA2: Implement
+	mType = Type::Int;
+	
+	if (mLHS->getType() != Type::Int) return false;
+	if (mRHS->getType() != Type::Int) return false;
 	
 	return true;
 }
@@ -34,6 +38,10 @@ bool ASTLogicalAnd::finalizeOp() noexcept
 bool ASTLogicalOr::finalizeOp() noexcept
 {
 	// PA2: Implement
+	mType = Type::Int;
+	
+	if (mLHS->getType() != Type::Int) return false;
+	if (mRHS->getType() != Type::Int) return false;
 	
 	return true;
 }
@@ -41,6 +49,10 @@ bool ASTLogicalOr::finalizeOp() noexcept
 bool ASTBinaryCmpOp::finalizeOp() noexcept
 {
 	// PA2: Implement
+	mType = Type::Int;
+	
+	if (mLHS->getType() != Type::Int) return false;
+	if (mRHS->getType() != Type::Int) return false;
 	
 	return true;
 }
@@ -48,6 +60,10 @@ bool ASTBinaryCmpOp::finalizeOp() noexcept
 bool ASTBinaryMathOp::finalizeOp() noexcept
 {
 	// PA2: Implement
+	mType = Type::Int;
+	
+	if (mLHS->getType() != Type::Int) return false;
+	if (mRHS->getType() != Type::Int) return false;
 	
 	return true;
 }
