@@ -92,6 +92,9 @@ llvm::Value* Identifier::readFrom(CodeContext& ctx) noexcept
 	else
 	{
 		// PA3: Load from the memory address of this identifier
+		llvm::IRBuilder<> build(ctx.mBlock);
+		retVal = build.CreateLoad(getAddress());
+		
 	}
 	return retVal;
 }
@@ -108,6 +111,8 @@ void Identifier::writeTo(CodeContext& ctx, llvm::Value* value) noexcept
 	else
 	{
 		// PA3: Write to memory address of this identifier
+		llvm::IRBuilder<> build(ctx.mBlock);
+		build.CreateStore(value, getAddress());
 	}
 }
 
@@ -293,7 +298,14 @@ void SymbolTable::ScopeTable::emitIR(CodeContext& ctx)
 			// and save the address.
 			// (Make sure you check for function arguments, which
 			// will already have a value which we needs to be copied)
-			
+			decl = build.CreateAlloca(ident->llvmType());
+			if (ident->getAddress()) {
+				auto oldVal = ident->getAddress();
+				ident->setAddress(decl);
+				ident->writeTo(ctx, oldVal);
+			} else {
+				ident->setAddress(decl);
+			}
 		}
 	}
 	
