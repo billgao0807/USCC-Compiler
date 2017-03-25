@@ -656,7 +656,7 @@ shared_ptr<ASTExpr> Parser::parseAddrOfArrayFactor()
 			if (expr) {
     matchToken(Token::RBracket);
 				shared_ptr<ASTArraySub> arraySub = make_shared<ASTArraySub>(*id, expr);
-				retVal = std::__1::make_shared<ASTAddrOfArray>(arraySub);
+				retVal = make_shared<ASTAddrOfArray>(arraySub);
 			} else {
 				throw ParseExceptMsg("Missing required subscript expression.");
 			}

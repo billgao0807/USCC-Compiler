@@ -137,10 +137,10 @@ AST_EMIT(ASTFunction)
 			// (Technically, iter actually has the value of the
 			// arg, not its address...but we will use the address
 			// member for this value)
-			argIdent.setAddress(iter);
+//			argIdent.setAddress(iter);
 			
 			// PA4: Write to this identifier
-			// argIdent.writeTo(ctx, iter);
+			 argIdent.writeTo(ctx, iter);
 			
 			++i;
 			++iter;
@@ -624,6 +624,9 @@ AST_EMIT(ASTIfStmt)
 	auto thenBlock = BasicBlock::Create(ctx.mGlobal, "if.then", ctx.mFunc);
 	auto endBlock = BasicBlock::Create(ctx.mGlobal, "if.end", ctx.mFunc);
 	
+	ctx.mSSA.addBlock(thenBlock);
+	ctx.mSSA.addBlock(endBlock);
+	
 	//Setup cond for branch
 	auto cond = mExpr->emitIR(ctx);
 	build.SetInsertPoint(ctx.mBlock);
@@ -631,9 +634,13 @@ AST_EMIT(ASTIfStmt)
 	//Two cases
 	if (mElseStmt) {
 		auto elseBlock = BasicBlock::Create(ctx.mGlobal, "if.else", ctx.mFunc);
+		
+		ctx.mSSA.addBlock(elseBlock);
+		
 		build.CreateCondBr(condResult, elseBlock, thenBlock);
 		
 		//Else emit and branch
+		ctx.mSSA.sealBlock(elseBlock);
 		ctx.mBlock = elseBlock;
 		mElseStmt->emitIR(ctx);
 		build.SetInsertPoint(ctx.mBlock);
@@ -643,25 +650,30 @@ AST_EMIT(ASTIfStmt)
 	}
 	
 	//Then emit and branch
+	ctx.mSSA.sealBlock(thenBlock);
 	ctx.mBlock = thenBlock;
 	mThenStmt->emitIR(ctx);
 	build.SetInsertPoint(ctx.mBlock);
 	build.CreateBr(endBlock);
 	
+	ctx.mSSA.sealBlock(endBlock);
 	ctx.mBlock = endBlock;
 
 	return nullptr;
+
 }
 
 AST_EMIT(ASTWhileStmt)
 {
 	// PA3: Implement
 	IRBuilder<> build(ctx.mGlobal);
-	
+
 	auto condBlock = BasicBlock::Create(ctx.mGlobal, "while.cond", ctx.mFunc);
 	auto bodyBlock = BasicBlock::Create(ctx.mGlobal, "while.body", ctx.mFunc);
 	auto endBlock = BasicBlock::Create(ctx.mGlobal, "while.end", ctx.mFunc);
 
+	ctx.mSSA.addBlock(condBlock);
+	
 	//Branch to cond
 	build.SetInsertPoint(ctx.mBlock);
 	build.CreateBr(condBlock);
@@ -671,6 +683,8 @@ AST_EMIT(ASTWhileStmt)
 	auto cond = mExpr->emitIR(ctx);
 	build.SetInsertPoint(ctx.mBlock);
 	auto condResult = build.CreateICmpEQ(cond, ctx.mZero);
+	ctx.mSSA.addBlock(bodyBlock);
+	ctx.mSSA.addBlock(endBlock);
 	build.CreateCondBr(condResult, endBlock, bodyBlock);
 	
 	//Branch from body to cond
@@ -679,9 +693,14 @@ AST_EMIT(ASTWhileStmt)
 	build.SetInsertPoint(ctx.mBlock);
 	build.CreateBr(condBlock);
 
+	ctx.mSSA.sealBlock(condBlock);
+	
 	//Set mBlock to endBlock
 	ctx.mBlock = endBlock;
 
+	ctx.mSSA.sealBlock(bodyBlock);
+	ctx.mSSA.sealBlock(endBlock);
+	
 	return nullptr;
 }
 

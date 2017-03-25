@@ -82,38 +82,38 @@ llvm::Type* Identifier::llvmType(bool treatArrayAsPtr /* = true */) noexcept
 llvm::Value* Identifier::readFrom(CodeContext& ctx) noexcept
 {
 	// PA4: Rewrite this entire function
-
-	llvm::Value* retVal = nullptr;
-	// Special case for arrays local to this function
-	if (isArray() && getArrayCount() != -1)
-	{
-		retVal = getAddress();
-	}
-	else
-	{
-		// PA3: Load from the memory address of this identifier
-		llvm::IRBuilder<> build(ctx.mBlock);
-		retVal = build.CreateLoad(getAddress());
-		
-	}
-	return retVal;
+	return ctx.mSSA.readVariable(this, ctx.mBlock);
+//	llvm::Value* retVal = nullptr;
+//	// Special case for arrays local to this function
+//	if (isArray() && getArrayCount() != -1)
+//	{
+//		retVal = getAddress();
+//	}
+//	else
+//	{
+//		// PA3: Load from the memory address of this identifier
+//		llvm::IRBuilder<> build(ctx.mBlock);
+//		retVal = build.CreateLoad(getAddress());
+//		
+//	}
+//	return retVal;
 }
 
 void Identifier::writeTo(CodeContext& ctx, llvm::Value* value) noexcept
 {
 	// PA4: Rewrite this entire function
-
+	return ctx.mSSA.writeVariable(this, ctx.mBlock, value);
 	// Special case for arrays local to this function
-	if (isArray() && getArrayCount() != -1)
-	{
-		setAddress(value);
-	}
-	else
-	{
-		// PA3: Write to memory address of this identifier
-		llvm::IRBuilder<> build(ctx.mBlock);
-		build.CreateStore(value, getAddress());
-	}
+//	if (isArray() && getArrayCount() != -1)
+//	{
+//		setAddress(value);
+//	}
+//	else
+//	{
+//		// PA3: Write to memory address of this identifier
+//		llvm::IRBuilder<> build(ctx.mBlock);
+//		build.CreateStore(value, getAddress());
+//	}
 }
 
 SymbolTable::SymbolTable() noexcept
@@ -290,23 +290,23 @@ void SymbolTable::ScopeTable::emitIR(CodeContext& ctx)
 			// Now write this GEP and save it for this identifier
 			ident->writeTo(ctx, decl);
 		}
-		else
-		{
-			// PA4: Remove this else case
-			
-			// PA3: Alloca the variables local to this function,
-			// and save the address.
-			// (Make sure you check for function arguments, which
-			// will already have a value which we needs to be copied)
-			decl = build.CreateAlloca(ident->llvmType());
-			if (ident->getAddress()) {
-				auto oldVal = ident->getAddress();
-				ident->setAddress(decl);
-				ident->writeTo(ctx, oldVal);
-			} else {
-				ident->setAddress(decl);
-			}
-		}
+//		else
+//		{
+//			// PA4: Remove this else case
+//			
+//			// PA3: Alloca the variables local to this function,
+//			// and save the address.
+//			// (Make sure you check for function arguments, which
+//			// will already have a value which we needs to be copied)
+//			decl = build.CreateAlloca(ident->llvmType());
+//			if (ident->getAddress()) {
+//				auto oldVal = ident->getAddress();
+//				ident->setAddress(decl);
+//				ident->writeTo(ctx, oldVal);
+//			} else {
+//				ident->setAddress(decl);
+//			}
+//		}
 	}
 	
 	// Now emit all the variables in the child scope tables

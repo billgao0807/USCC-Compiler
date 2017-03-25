@@ -393,7 +393,7 @@ std::shared_ptr<ASTExpr> Parser::charToInt(std::shared_ptr<ASTExpr> expr) noexce
 			constExpr->changeToInt();
 			retVal = constExpr;
 		} else {
-			auto other = std::__1::make_shared<ASTToIntExpr>(expr);
+			auto other = make_shared<ASTToIntExpr>(expr);
 			retVal = other;
 		}
 	}
@@ -416,7 +416,7 @@ std::shared_ptr<ASTExpr> Parser::intToChar(std::shared_ptr<ASTExpr> expr) noexce
 				constExpr->changeToChar();
 				retVal = constExpr;
 			} else {
-				auto other = std::__1::make_shared<ASTToCharExpr>(expr);
+				auto other = make_shared<ASTToCharExpr>(expr);
 				retVal = other;
 			}
 		}
