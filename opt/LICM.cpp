@@ -27,20 +27,69 @@ namespace uscc
 {
 namespace opt
 {
-	
+    
+bool LICM::isSafeToHoistInstr(llvm::Instruction* inst){
+    return (mCurrLoop->hasLoopInvariantOperands(inst) &&
+            isSafeToSpeculativelyExecute(inst) && (
+            isa<BinaryOperator>(inst) || isa<CastInst>(inst) || isa<SelectInst>(inst) ||
+            isa<GetElementPtrInst>(inst) || isa<CmpInst>(inst))
+            );
+}
+
+void LICM::hoistInstr(llvm::Instruction* inst){
+    auto preheaderBlock = mCurrLoop->getLoopPreheader();
+    auto terminator = preheaderBlock->getTerminator();
+    inst->moveBefore(terminator);
+    mChanged = true;
+}
+
+void LICM::hoistPreOrder(llvm::DomTreeNode *node){
+    auto block = node->getBlock();
+    if (mLoopInfo->getLoopFor(block) == mCurrLoop){
+        for (auto it = block->begin(); it != block->end(); ) {
+            auto currInst = it;
+            ++it;
+            if (isSafeToHoistInstr(currInst)) {
+                hoistInstr(currInst);
+            }
+        }
+    }
+    for (auto child : node->getChildren()){
+        hoistPreOrder(child);
+    }
+}
+    
 bool LICM::runOnLoop(llvm::Loop *L, llvm::LPPassManager &LPM)
 {
 	mChanged = false;
 	
 	// PA5: Implement
-	
+    // Save the current loop
+    mCurrLoop = L;
+    // Grab the loop info
+    mLoopInfo = &getAnalysis<LoopInfo>();
+    // Grab the dominator tree
+    mDomTree = &getAnalysis<DominatorTreeWrapperPass>().getDomTree();
+    
+    auto node = mDomTree->getRootNode();
+    hoistPreOrder(node);
+
 	return mChanged;
 }
 
 void LICM::getAnalysisUsage(AnalysisUsage &Info) const
 {
 	// PA5: Implement
+    // LICM does not modify the CFG
+    Info.setPreservesCFG();
+    // Execute after dead blocks have been removed
+    Info.addRequired<DeadBlocks>();
+    // Use the built-in Dominator tree and loop info passes
+    Info.addRequired<DominatorTreeWrapperPass>();
+    Info.addRequired<LoopInfo>();
 }
+
+
 	
 } // opt
 } // uscc

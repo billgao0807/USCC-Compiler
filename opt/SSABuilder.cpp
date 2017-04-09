@@ -100,15 +100,29 @@ Value* SSABuilder::readVariableRecursive(Identifier* var, BasicBlock* block)
 	
 	// PA4: Implement
 	if (mSealedBlocks.find(block) == mSealedBlocks.end()) {
-//		auto phi = PHINode::Create(var->llvmType(), 0, Twine("incmpphi"), block);
-		auto phi = block->empty() ? PHINode::Create(var->llvmType(), 0, Twine("PhiNodeSeal"), block) : PHINode::Create(var->llvmType(), 0, Twine("PhiNodeSeal"), &block->front());
+        PHINode* phi;
+        if (block->empty()) {
+            IRBuilder<> build(block);
+            phi = build.CreatePHI(var->llvmType(), 0);
+        } else {
+            IRBuilder<> build(&block->front());
+            phi = build.CreatePHI(var->llvmType(), 0);
+        }
+        
 		(*mIncompletePhis[block])[var] = phi;
 		retVal = phi;
 	} else if (block->getSinglePredecessor() != nullptr) {
 		retVal = readVariable(var, block->getSinglePredecessor());
 	} else {
-//		auto phi = PHINode::Create(var->llvmType(), 0, Twine("incmpphi"), block);
-		auto phi = block->empty() ? PHINode::Create(var->llvmType(), 0, Twine("PhiNodeSeal"), block) : PHINode::Create(var->llvmType(), 0, Twine("PhiNodeSeal"), &block->front());
+
+        PHINode* phi;
+        if (block->empty()) {
+            IRBuilder<> build(block);
+            phi = build.CreatePHI(var->llvmType(), 0);
+        } else {
+            IRBuilder<> build(&block->front());
+            phi = build.CreatePHI(var->llvmType(), 0);
+        }
 		writeVariable(var, block, phi);
 		retVal = addPhiOperands(var, phi);
 	}

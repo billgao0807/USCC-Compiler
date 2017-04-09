@@ -622,10 +622,10 @@ AST_EMIT(ASTIfStmt)
 	IRBuilder<> build(ctx.mGlobal);
 	
 	auto thenBlock = BasicBlock::Create(ctx.mGlobal, "if.then", ctx.mFunc);
-	auto endBlock = BasicBlock::Create(ctx.mGlobal, "if.end", ctx.mFunc);
+	
 	
 	ctx.mSSA.addBlock(thenBlock);
-	ctx.mSSA.addBlock(endBlock);
+	
 	
 	//Setup cond for branch
 	auto cond = mExpr->emitIR(ctx);
@@ -634,7 +634,7 @@ AST_EMIT(ASTIfStmt)
 	//Two cases
 	if (mElseStmt) {
 		auto elseBlock = BasicBlock::Create(ctx.mGlobal, "if.else", ctx.mFunc);
-		
+		auto endBlock = BasicBlock::Create(ctx.mGlobal, "if.end", ctx.mFunc);
 		ctx.mSSA.addBlock(elseBlock);
 		
 		build.CreateCondBr(condResult, elseBlock, thenBlock);
@@ -644,20 +644,35 @@ AST_EMIT(ASTIfStmt)
 		ctx.mBlock = elseBlock;
 		mElseStmt->emitIR(ctx);
 		build.SetInsertPoint(ctx.mBlock);
+        ctx.mSSA.addBlock(endBlock);
 		build.CreateBr(endBlock);
+        
+        //Then emit and branch
+        ctx.mSSA.sealBlock(thenBlock);
+        ctx.mBlock = thenBlock;
+        mThenStmt->emitIR(ctx);
+        build.SetInsertPoint(ctx.mBlock);
+        build.CreateBr(endBlock);
+        
+        ctx.mSSA.sealBlock(endBlock);
+        ctx.mBlock = endBlock;
 	} else {
+        auto endBlock = BasicBlock::Create(ctx.mGlobal, "if.end", ctx.mFunc);
+        ctx.mSSA.addBlock(endBlock);
 		build.CreateCondBr(condResult, endBlock, thenBlock);
+        
+        //Then emit and branch
+        ctx.mSSA.sealBlock(thenBlock);
+        ctx.mBlock = thenBlock;
+        mThenStmt->emitIR(ctx);
+        build.SetInsertPoint(ctx.mBlock);
+        build.CreateBr(endBlock);
+        
+        ctx.mSSA.sealBlock(endBlock);
+        ctx.mBlock = endBlock;
 	}
 	
-	//Then emit and branch
-	ctx.mSSA.sealBlock(thenBlock);
-	ctx.mBlock = thenBlock;
-	mThenStmt->emitIR(ctx);
-	build.SetInsertPoint(ctx.mBlock);
-	build.CreateBr(endBlock);
 	
-	ctx.mSSA.sealBlock(endBlock);
-	ctx.mBlock = endBlock;
 
 	return nullptr;
 
@@ -669,8 +684,8 @@ AST_EMIT(ASTWhileStmt)
 	IRBuilder<> build(ctx.mGlobal);
 
 	auto condBlock = BasicBlock::Create(ctx.mGlobal, "while.cond", ctx.mFunc);
-	auto bodyBlock = BasicBlock::Create(ctx.mGlobal, "while.body", ctx.mFunc);
-	auto endBlock = BasicBlock::Create(ctx.mGlobal, "while.end", ctx.mFunc);
+//	auto bodyBlock = BasicBlock::Create(ctx.mGlobal, "while.body", ctx.mFunc);
+//	auto endBlock = BasicBlock::Create(ctx.mGlobal, "while.end", ctx.mFunc);
 
 	ctx.mSSA.addBlock(condBlock);
 	
@@ -683,10 +698,14 @@ AST_EMIT(ASTWhileStmt)
 	auto cond = mExpr->emitIR(ctx);
 	build.SetInsertPoint(ctx.mBlock);
 	auto condResult = build.CreateICmpEQ(cond, ctx.mZero);
+    
+    auto bodyBlock = BasicBlock::Create(ctx.mGlobal, "while.body", ctx.mFunc);
 	ctx.mSSA.addBlock(bodyBlock);
+    auto endBlock = BasicBlock::Create(ctx.mGlobal, "while.end", ctx.mFunc);
 	ctx.mSSA.addBlock(endBlock);
 	build.CreateCondBr(condResult, endBlock, bodyBlock);
 	
+    ctx.mSSA.sealBlock(endBlock);
 	//Branch from body to cond
 	ctx.mBlock = bodyBlock;
 	mLoopStmt->emitIR(ctx);
@@ -694,12 +713,13 @@ AST_EMIT(ASTWhileStmt)
 	build.CreateBr(condBlock);
 
 	ctx.mSSA.sealBlock(condBlock);
+    ctx.mSSA.sealBlock(bodyBlock);
 	
 	//Set mBlock to endBlock
 	ctx.mBlock = endBlock;
 
-	ctx.mSSA.sealBlock(bodyBlock);
-	ctx.mSSA.sealBlock(endBlock);
+	
+	
 	
 	return nullptr;
 }
