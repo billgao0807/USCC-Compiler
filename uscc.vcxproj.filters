@@ -57,9 +57,6 @@
     <None Include="tests\live01.usc">
       <Filter>tests</Filter>
     </None>
-    <None Include="tests\quicksort.bc">
-      <Filter>tests</Filter>
-    </None>
     <None Include="tests\quicksort.usc">
       <Filter>tests</Filter>
     </None>
@@ -296,6 +293,9 @@
       <Filter>opt</Filter>
     </ClCompile>
     <ClCompile Include="opt\Passes.cpp">
+      <Filter>opt</Filter>
+    </ClCompile>
+    <ClCompile Include="opt\RegAlloc.cpp">
       <Filter>opt</Filter>
     </ClCompile>
   </ItemGroup>

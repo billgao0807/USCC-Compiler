@@ -4,7 +4,16 @@
 //
 //  Implements helper classes related to LLVM IR
 //  construction.
+//---------------------------------------------------------
+//  Portions of the code in this file are:
+//  Copyright (c) 2003-2014 University of Illinois at
+//  Urbana-Champaign.
+//  All rights reserved.
 //
+//  Distributed under the University of Illinois Open Source
+//  License.
+//---------------------------------------------------------
+//  Remaining code is:
 //---------------------------------------------------------
 //  Copyright (c) 2014, Sanjay Madhav
 //  All rights reserved.
@@ -40,12 +49,16 @@
 #include <llvm/Target/TargetMachine.h>
 #include <llvm/Support//FileSystem.h>
 #include <llvm/Support/SourceMgr.h>
+#include <llvm/Support/CommandLine.h>
 #include <llvm/MC/SubtargetFeature.h>
+#include <llvm/IR/Module.h>
 #include "../opt/Passes.h"
 #pragma clang diagnostic pop
 
 using namespace uscc::parse;
 using namespace llvm;
+
+extern size_t NUM_COLORS;
 
 CodeContext::CodeContext(StringTable& strings)
 : mGlobal(getGlobalContext())
@@ -103,9 +116,101 @@ bool Emitter::verify() noexcept
 }
 
 // This function will take the bitcode emitted by uscc and convert it to assembly
-bool Emitter::writeAsm(const char *fileName) noexcept
+bool Emitter::writeAsm(const char *fileName, unsigned long numColors) noexcept
 {
-	// 11/20/2014 - This function removed because it doesn't work with LLVM 3.5.0...
+	NUM_COLORS = static_cast<size_t>(numColors);
+	Module* mod = mContext.mModule;
+	// This code is copied over from llc
+	InitializeNativeTarget();
+	InitializeNativeTargetAsmPrinter();
+	InitializeNativeTargetAsmParser();
 	
+	PassRegistry *Registry = PassRegistry::getPassRegistry();
+	initializeCore(*Registry);
+	initializeCodeGen(*Registry);
+	initializeLoopStrengthReducePass(*Registry);
+	initializeLowerIntrinsicsPass(*Registry);
+	initializeUnreachableBlockElimPass(*Registry);
+	
+	const char* argv[] = {
+		fileName,
+		"-optimize-regalloc=true",
+		"-regalloc=uscc"
+	};
+	cl::ParseCommandLineOptions(3, argv, "llvm system compiler\n");
+	
+	Triple TheTriple;
+	TheTriple.setTriple(sys::getDefaultTargetTriple());
+	
+	auto MCPU = sys::getHostCPUName();
+	
+	// Get the target specific parser.
+	std::string Error;
+	const Target *TheTarget = TargetRegistry::lookupTarget("", TheTriple,
+														   Error);
+	if (!TheTarget) {
+		errs() << fileName << ": " << Error;
+		return false;
+	}
+	
+	// Package up features to be passed to target/subtarget
+	CodeGenOpt::Level OLvl = CodeGenOpt::Less;
+	
+	TargetOptions Options;
+	Options.DisableIntegratedAS = false;
+	Options.MCOptions.ShowMCEncoding = false;
+	Options.MCOptions.MCUseDwarfDirectory = false;
+	Options.MCOptions.AsmVerbose = true;
+	
+	std::unique_ptr<TargetMachine> target(
+										  TheTarget->createTargetMachine(TheTriple.getTriple(), MCPU, "",
+																		 Options, Reloc::Default,
+																		 CodeModel::Default, OLvl));
+	assert(target.get() && "Could not allocate target machine!");
+	
+	
+	assert(mod && "Should have exited if we didn't have a module!");
+	TargetMachine &Target = *target.get();
+	
+	
+	sys::fs::OpenFlags OpenFlags = sys::fs::F_None;
+	OpenFlags |= sys::fs::F_Text;
+	tool_output_file *FDOut = new tool_output_file(fileName, Error,
+												   OpenFlags);
+	// Figure out where we are going to send the output.
+	std::unique_ptr<tool_output_file> Out(FDOut);
+	if (!Out) return 1;
+	
+	// Build up all of the passes that we want to do to the module.
+	PassManager PM;
+	
+	// Add an appropriate TargetLibraryInfo pass for the module's triple.
+	TargetLibraryInfo *TLI = new TargetLibraryInfo(TheTriple);
+	PM.add(TLI);
+		
+	// Add the target data from the target machine, if it exists, or the module.
+	if (const DataLayout *DL = Target.getDataLayout())
+		mod->setDataLayout(DL);
+	
+	PM.add(new DataLayoutPass(mod));
+		
+	{
+		formatted_raw_ostream FOS(Out->os());
+		
+		
+		// Ask the target to add backend passes as necessary.
+		if (Target.addPassesToEmitFile(PM, FOS, TargetMachine::CGFT_AssemblyFile, false,
+									   nullptr, nullptr)) {
+			errs() << fileName << ": target does not support generation of this"
+			<< " file type!\n";
+			return 1;
+		}
+		
+		PM.run(*mod);
+	}
+	
+	// Declare success.
+	Out->keep();
+
 	return true;
 }

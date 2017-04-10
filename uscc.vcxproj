@@ -39,7 +39,6 @@
     <None Include="tests\parse04e.usc" />
     <None Include="tests\parse05e.usc" />
     <None Include="tests\parse06e.usc" />
-    <None Include="tests\quicksort.bc" />
     <None Include="tests\quicksort.usc" />
     <None Include="tests\semant01.usc" />
     <None Include="tests\semant01e.usc" />
@@ -92,6 +91,7 @@
     <ClCompile Include="opt\DeadBlocks.cpp" />
     <ClCompile Include="opt\LICM.cpp" />
     <ClCompile Include="opt\Passes.cpp" />
+    <ClCompile Include="opt\RegAlloc.cpp" />
     <ClCompile Include="opt\SSABuilder.cpp" />
     <ClCompile Include="parse\ASTEmit.cpp" />
     <ClCompile Include="parse\ASTExpr.cpp" />
