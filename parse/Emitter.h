@@ -70,7 +70,7 @@ public:
 	void print() noexcept;
 	void writeBitcode(const char* fileName) noexcept;
 	bool verify() noexcept;
-	bool writeAsm(const char* fileName) noexcept;
+	bool writeAsm(const char* fileName, unsigned long numColors) noexcept;
 private:
 	CodeContext mContext;
 };

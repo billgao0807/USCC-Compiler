@@ -26,6 +26,7 @@
 		92D4F1CE18A4BEED004F450F /* Symbols.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92D4F1CC18A4BEED004F450F /* Symbols.cpp */; };
 		92D4F1D118A4C237004F450F /* ASTEmit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92D4F1CF18A4C237004F450F /* ASTEmit.cpp */; };
 		92D4F1D218A4C237004F450F /* ASTPrint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92D4F1D018A4C237004F450F /* ASTPrint.cpp */; };
+		92DE61E31E1F421B00405ACC /* RegAlloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92DE61E21E1F421B00405ACC /* RegAlloc.cpp */; settings = {COMPILER_FLAGS = "-fno-rtti -Wno-conversion"; }; };
 		92FECDA7189F64E6005F28A3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92FECDA6189F64E6005F28A3 /* main.cpp */; };
 		92FECDBB189F6F5B005F28A3 /* FlexLexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92FECDBA189F6F5B005F28A3 /* FlexLexer.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-register"; }; };
 /* End PBXBuildFile section */
@@ -129,12 +130,13 @@
 		92D7840218A630EC00793432 /* test009.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = test009.usc; sourceTree = "<group>"; };
 		92D7840318A636A300793432 /* test010.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = test010.usc; sourceTree = "<group>"; };
 		92D7840418A63F7700793432 /* test011.usc */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; path = test011.usc; sourceTree = "<group>"; };
+		92DE61E21E1F421B00405ACC /* RegAlloc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegAlloc.cpp; sourceTree = "<group>"; };
 		92FECDA3189F64E6005F28A3 /* uscc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = uscc; sourceTree = BUILT_PRODUCTS_DIR; };
 		92FECDA6189F64E6005F28A3 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		92FECDB5189F6C96005F28A3 /* Tokens.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = Tokens.h; sourceTree = "<group>"; };
 		92FECDB9189F6F46005F28A3 /* usc.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; path = usc.l; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		92FECDBA189F6F5B005F28A3 /* FlexLexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlexLexer.cpp; sourceTree = "<group>"; };
-		92FECDBF189F7A29005F28A3 /* Tokens.def */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c.preprocessed; path = Tokens.def; sourceTree = "<group>"; };
+		92FECDBF189F7A29005F28A3 /* Tokens.def */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tokens.def; sourceTree = "<group>"; };
 		92FECDC3189F8248005F28A3 /* test001.usc */ = {isa = PBXFileReference; lastKnownFileType = text; path = test001.usc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 		9253B0F118B40045004192A1 /* opt */ = {
 			isa = PBXGroup;
 			children = (
+				92DE61E21E1F421B00405ACC /* RegAlloc.cpp */,
 				924739E41915BC6E0065AC92 /* Passes.h */,
 				9299C6FE1A3C17F4007587A3 /* Passes.cpp */,
 				9253B0F718B40105004192A1 /* SSABuilder.h */,
@@ -379,6 +382,7 @@
 				922D818D18A3693F0079DD28 /* ParseStmt.cpp in Sources */,
 				92FECDA7189F64E6005F28A3 /* main.cpp in Sources */,
 				922D818B18A363A00079DD28 /* ASTNodes.cpp in Sources */,
+				92DE61E31E1F421B00405ACC /* RegAlloc.cpp in Sources */,
 				92FECDBB189F6F5B005F28A3 /* FlexLexer.cpp in Sources */,
 				92AC019418A32DBB00F35AA1 /* Tokens.cpp in Sources */,
 				9299C6FF1A3C17F4007587A3 /* Passes.cpp in Sources */,
@@ -514,6 +518,8 @@
 					"-lLLVMCore",
 					"-lLLVMSupport",
 					"-lLLVMBitWriter",
+					"-lLLVMBitReader",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = (
@@ -569,6 +575,8 @@
 					"-lLLVMCore",
 					"-lLLVMSupport",
 					"-lLLVMBitWriter",
+					"-lLLVMBitReader",
+					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = (

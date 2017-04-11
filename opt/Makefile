@@ -5,7 +5,7 @@ include ../Makefile.variables
 INCPATH =  -I../../llvm/include
 INCPATH += -I../parse
 
-OBJS = ConstantBranch.o ConstantOps.o DeadBlocks.o SSABuilder.o LICM.o Passes.o
+OBJS = ConstantBranch.o ConstantOps.o DeadBlocks.o SSABuilder.o LICM.o Passes.o RegAlloc.o
 
 SRCS = $(OBJS:.o=.cpp)
 
